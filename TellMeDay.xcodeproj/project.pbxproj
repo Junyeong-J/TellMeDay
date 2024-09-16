@@ -8,17 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA22C9028C800311CE8 /* TellMeDayApp.swift */; };
-		72940CA52C9028C800311CE8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA42C9028C800311CE8 /* ContentView.swift */; };
+		72940CA52C9028C800311CE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA42C9028C800311CE8 /* MainView.swift */; };
 		72940CA72C9028C900311CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72940CA62C9028C900311CE8 /* Assets.xcassets */; };
 		72940CAA2C9028C900311CE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72940CA92C9028C900311CE8 /* Preview Assets.xcassets */; };
+		72940D0E2C982DEB00311CE8 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 72940D0D2C982DEB00311CE8 /* FSCalendar */; };
+		72940D112C98373900311CE8 /* MonthCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D102C98373900311CE8 /* MonthCalendarViewController.swift */; };
+		72940D142C983F2200311CE8 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 72940D132C983F2200311CE8 /* SnapKit */; };
+		72940D172C98424800311CE8 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D162C98424800311CE8 /* CalendarCell.swift */; };
+		72940D1A2C98432700311CE8 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D192C98432700311CE8 /* CalendarViewModel.swift */; };
+		72940D1D2C98437800311CE8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 72940D1C2C98437800311CE8 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		72940C9F2C9028C800311CE8 /* TellMeDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72940CA22C9028C800311CE8 /* TellMeDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeDayApp.swift; sourceTree = "<group>"; };
-		72940CA42C9028C800311CE8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		72940CA42C9028C800311CE8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		72940CA62C9028C900311CE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72940CA92C9028C900311CE8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		72940D102C98373900311CE8 /* MonthCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarViewController.swift; sourceTree = "<group>"; };
+		72940D162C98424800311CE8 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		72940D192C98432700311CE8 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +35,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72940D1D2C98437800311CE8 /* Kingfisher in Frameworks */,
+				72940D0E2C982DEB00311CE8 /* FSCalendar in Frameworks */,
+				72940D142C983F2200311CE8 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,9 +63,8 @@
 		72940CA12C9028C800311CE8 /* TellMeDay */ = {
 			isa = PBXGroup;
 			children = (
-				72940CA22C9028C800311CE8 /* TellMeDayApp.swift */,
-				72940CA42C9028C800311CE8 /* ContentView.swift */,
-				72940CA62C9028C900311CE8 /* Assets.xcassets */,
+				72940D082C982D7900311CE8 /* Source */,
+				72940D092C982D7E00311CE8 /* Resource */,
 				72940CA82C9028C900311CE8 /* Preview Content */,
 			);
 			path = TellMeDay;
@@ -65,6 +76,66 @@
 				72940CA92C9028C900311CE8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		72940D082C982D7900311CE8 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				72940D182C98431B00311CE8 /* ViewModel */,
+				72940D0A2C982DA400311CE8 /* App */,
+				72940D0B2C982DB300311CE8 /* Views */,
+				72940D0F2C98371D00311CE8 /* Controller */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		72940D092C982D7E00311CE8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				72940CA62C9028C900311CE8 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		72940D0A2C982DA400311CE8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				72940CA22C9028C800311CE8 /* TellMeDayApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		72940D0B2C982DB300311CE8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72940CA42C9028C800311CE8 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72940D0F2C98371D00311CE8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				72940D152C98423600311CE8 /* Cell */,
+				72940D102C98373900311CE8 /* MonthCalendarViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		72940D152C98423600311CE8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				72940D162C98424800311CE8 /* CalendarCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		72940D182C98431B00311CE8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				72940D192C98432700311CE8 /* CalendarViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +154,11 @@
 			dependencies = (
 			);
 			name = TellMeDay;
+			packageProductDependencies = (
+				72940D0D2C982DEB00311CE8 /* FSCalendar */,
+				72940D132C983F2200311CE8 /* SnapKit */,
+				72940D1C2C98437800311CE8 /* Kingfisher */,
+			);
 			productName = TellMeDay;
 			productReference = 72940C9F2C9028C800311CE8 /* TellMeDay.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +187,11 @@
 				Base,
 			);
 			mainGroup = 72940C962C9028C800311CE8;
+			packageReferences = (
+				72940D0C2C982DEB00311CE8 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				72940D122C983F2200311CE8 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				72940D1B2C98437800311CE8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 72940CA02C9028C800311CE8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,8 +218,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72940CA52C9028C800311CE8 /* ContentView.swift in Sources */,
+				72940D112C98373900311CE8 /* MonthCalendarViewController.swift in Sources */,
+				72940CA52C9028C800311CE8 /* MainView.swift in Sources */,
 				72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */,
+				72940D172C98424800311CE8 /* CalendarCell.swift in Sources */,
+				72940D1A2C98432700311CE8 /* CalendarViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +438,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		72940D0C2C982DEB00311CE8 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
+		72940D122C983F2200311CE8 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		72940D1B2C98437800311CE8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		72940D0D2C982DEB00311CE8 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 72940D0C2C982DEB00311CE8 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		72940D132C983F2200311CE8 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 72940D122C983F2200311CE8 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		72940D1C2C98437800311CE8 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 72940D1B2C98437800311CE8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 72940C972C9028C800311CE8 /* Project object */;
 }
