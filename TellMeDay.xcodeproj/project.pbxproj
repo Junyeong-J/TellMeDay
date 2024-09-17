@@ -81,9 +81,9 @@
 		72940D082C982D7900311CE8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				72940D182C98431B00311CE8 /* ViewModel */,
 				72940D0A2C982DA400311CE8 /* App */,
 				72940D0B2C982DB300311CE8 /* Views */,
+				72940D182C98431B00311CE8 /* ViewModel */,
 				72940D0F2C98371D00311CE8 /* Controller */,
 			);
 			path = Source;

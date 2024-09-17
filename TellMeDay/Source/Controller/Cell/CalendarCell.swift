@@ -21,7 +21,7 @@ class CalendarCell: FSCalendarCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        titleLabel.snp.makeConstraints { make in
+        self.titleLabel.snp.makeConstraints { make in
             make.center.equalTo(contentView)
         }
         
@@ -49,6 +49,9 @@ class CalendarCell: FSCalendarCell {
     func minSize() -> CGFloat {
         let width = contentView.bounds.width - 5
         let height = contentView.bounds.height - 5
-        return min(width, height)
+        
+        return (width > height) ? height : width
     }
 }
+
+

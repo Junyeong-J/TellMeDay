@@ -22,18 +22,49 @@ struct MonthCalendarViewControllerWrapper: UIViewControllerRepresentable {
 }
 
 final class MonthCalendarViewController: UIViewController {
-    
+
     var calendar = FSCalendar()
     var viewModel = CalendarViewModel()
     var currentPageDate: Date?
+    var monthView: UIView = UIView()
+    var headerLabel: UILabel = UILabel()
+
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        setupMonthView()
         settingCalendar()
         setupLayout()
     }
-    
+
+    func setupMonthView() {
+        view.addSubview(monthView)
+        monthView.addSubview(headerLabel)
+
+        headerLabel.textAlignment = .center
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 24)
+
+        monthView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.equalTo(view)
+            make.height.equalTo(60)
+        }
+
+        headerLabel.snp.makeConstraints { make in
+            make.edges.equalTo(monthView)
+        }
+
+        currentPageDate = calendar.currentPage
+        headerLabel.text = dateFormatter.string(from: currentPageDate ?? Date())
+    }
+
     func settingCalendar() {
         calendar.register(CalendarCell.self, forCellReuseIdentifier: CalendarCell.description())
         
@@ -58,14 +89,15 @@ final class MonthCalendarViewController: UIViewController {
         calendar.appearance.caseOptions = .weekdayUsesSingleUpperCase
         calendar.appearance.weekdayTextColor = .black
         calendar.appearance.titleFont = .boldSystemFont(ofSize: 12)
-        calendar.weekdayHeight = 10
-        calendar.placeholderType = .none
+        calendar.weekdayHeight = 15
+        calendar.placeholderType = .fillSixRows
     }
     
     private func setupLayout() {
         view.addSubview(calendar)
         calendar.snp.makeConstraints { make in
-            make.edges.equalTo(view)
+            make.top.equalTo(monthView.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view)
         }
     }
 }
@@ -75,10 +107,16 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
         guard let cell = calendar.dequeueReusableCell(withIdentifier: CalendarCell.description(), for: date, at: position) as? CalendarCell else {
             return FSCalendarCell()
         }
+
+        guard position == .current else {
+            cell.backImageView.image = nil
+            cell.backImageView.alpha = 0
+            return cell
+        }
         
         viewModel.fetchArtwork(date) { url in
             if let url = url {
-                cell.backImageView.kf.setImage(with: url)
+                cell.backImageView.image = url
             }
         }
         
@@ -87,12 +125,17 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        guard monthPosition == .current else {
+            return
+        }
+        
         viewModel.updateSelectedDate(date)
         
         if let previousSelectedDate = viewModel.previousSelectedDate,
            let previousCell = calendar.cell(for: previousSelectedDate, at: monthPosition) as? CalendarCell {
             previousCell.backImageView.alpha = 0.5
         }
+        
         if let currentSelectedDate = viewModel.currentSelectedDate,
            let currentCell = calendar.cell(for: currentSelectedDate, at: monthPosition) as? CalendarCell {
             currentCell.backImageView.alpha = 1
@@ -101,6 +144,7 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         currentPageDate = calendar.currentPage
+        headerLabel.text = dateFormatter.string(from: currentPageDate ?? Date())
         calendar.reloadData()
     }
     
@@ -108,4 +152,3 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
         return Date()
     }
 }
-
