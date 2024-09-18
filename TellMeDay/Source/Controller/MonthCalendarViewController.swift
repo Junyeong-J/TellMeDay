@@ -12,8 +12,15 @@ import SnapKit
 import Kingfisher
 
 struct MonthCalendarViewControllerWrapper: UIViewControllerRepresentable {
+    
+    @Binding var selectedDate: Date?
+    
     func makeUIViewController(context: Context) -> some UIViewController {
-        return MonthCalendarViewController()
+        let vc = MonthCalendarViewController()
+        vc.onDateSelected = { date in
+            selectedDate = date
+        }
+        return vc
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
@@ -28,6 +35,7 @@ final class MonthCalendarViewController: UIViewController {
     var currentPageDate: Date?
     var monthView: UIView = UIView()
     var headerLabel: UILabel = UILabel()
+    var onDateSelected: ((Date) -> Void)?
 
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -140,6 +148,8 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
            let currentCell = calendar.cell(for: currentSelectedDate, at: monthPosition) as? CalendarCell {
             currentCell.backImageView.alpha = 1
         }
+        
+        onDateSelected?(date)
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {

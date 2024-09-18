@@ -8,10 +8,28 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @State private var selectedDate: Date? = nil
+    
     var body: some View {
-        MonthCalendarViewControllerWrapper()
-            .frame(height: 450)
-            .padding()
+        
+        NavigationStack {
+            VStack {
+                MonthCalendarViewControllerWrapper(selectedDate: $selectedDate)
+                    .frame(height: 450)
+                    .padding()
+                
+            }
+            .navigationDestination(isPresented: Binding(
+                get: { selectedDate != nil },
+                set: { _ in selectedDate = nil }
+            )) {
+                if let date = selectedDate {
+                    RecodeView(selectedDate: date)
+                }
+            }
+        }
+        
     }
 }
 

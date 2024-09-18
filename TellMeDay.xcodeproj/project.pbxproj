@@ -17,6 +17,7 @@
 		72940D172C98424800311CE8 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D162C98424800311CE8 /* CalendarCell.swift */; };
 		72940D1A2C98432700311CE8 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D192C98432700311CE8 /* CalendarViewModel.swift */; };
 		72940D1D2C98437800311CE8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 72940D1C2C98437800311CE8 /* Kingfisher */; };
+		72940D1F2C9A780A00311CE8 /* RecodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D1E2C9A780A00311CE8 /* RecodeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		72940D102C98373900311CE8 /* MonthCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarViewController.swift; sourceTree = "<group>"; };
 		72940D162C98424800311CE8 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		72940D192C98432700311CE8 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		72940D1E2C9A780A00311CE8 /* RecodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				72940CA42C9028C800311CE8 /* MainView.swift */,
+				72940D1E2C9A780A00311CE8 /* RecodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				72940CA52C9028C800311CE8 /* MainView.swift in Sources */,
 				72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */,
 				72940D172C98424800311CE8 /* CalendarCell.swift in Sources */,
+				72940D1F2C9A780A00311CE8 /* RecodeView.swift in Sources */,
 				72940D1A2C98432700311CE8 /* CalendarViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
