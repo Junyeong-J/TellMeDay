@@ -18,7 +18,6 @@ struct MainView: View {
                 MonthCalendarViewControllerWrapper(selectedDate: $selectedDate)
                     .frame(height: 450)
                     .padding()
-                
             }
             .navigationDestination(isPresented: Binding(
                 get: { selectedDate != nil },
