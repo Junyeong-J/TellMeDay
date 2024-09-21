@@ -19,12 +19,13 @@ struct MainView: View {
                     .frame(height: 450)
                     .padding()
             }
+            
             .navigationDestination(isPresented: Binding(
                 get: { selectedDate != nil },
                 set: { _ in selectedDate = nil }
             )) {
                 if let date = selectedDate {
-                    RecodeView(selectedDate: date)
+                    RecodeView()
                 }
             }
         }

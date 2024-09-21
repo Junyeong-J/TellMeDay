@@ -20,6 +20,9 @@
 		72940D1F2C9A780A00311CE8 /* RecodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D1E2C9A780A00311CE8 /* RecodeView.swift */; };
 		72940D222C9C018800311CE8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 72940D212C9C018800311CE8 /* RealmSwift */; };
 		72940D232C9C019600311CE8 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 72940D212C9C018800311CE8 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		72940D262C9D457500311CE8 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D252C9D457500311CE8 /* CustomTabView.swift */; };
+		72940D282C9EA86C00311CE8 /* VoiceRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */; };
+		72940D2B2C9EAA0D00311CE8 /* ForegroundWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D2A2C9EAA0D00311CE8 /* ForegroundWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +49,9 @@
 		72940D162C98424800311CE8 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		72940D192C98432700311CE8 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		72940D1E2C9A780A00311CE8 /* RecodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodeView.swift; sourceTree = "<group>"; };
+		72940D252C9D457500311CE8 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordingView.swift; sourceTree = "<group>"; };
+		72940D2A2C9EAA0D00311CE8 /* ForegroundWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				72940D0A2C982DA400311CE8 /* App */,
+				72940D292C9EA9EE00311CE8 /* Wrappers */,
 				72940D0B2C982DB300311CE8 /* Views */,
 				72940D182C98431B00311CE8 /* ViewModel */,
 				72940D0F2C98371D00311CE8 /* Controller */,
@@ -127,8 +134,10 @@
 		72940D0B2C982DB300311CE8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				72940D252C9D457500311CE8 /* CustomTabView.swift */,
 				72940CA42C9028C800311CE8 /* MainView.swift */,
 				72940D1E2C9A780A00311CE8 /* RecodeView.swift */,
+				72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -156,6 +165,14 @@
 				72940D192C98432700311CE8 /* CalendarViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		72940D292C9EA9EE00311CE8 /* Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				72940D2A2C9EAA0D00311CE8 /* ForegroundWrapper.swift */,
+			);
+			path = Wrappers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,11 +259,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				72940D112C98373900311CE8 /* MonthCalendarViewController.swift in Sources */,
+				72940D282C9EA86C00311CE8 /* VoiceRecordingView.swift in Sources */,
+				72940D2B2C9EAA0D00311CE8 /* ForegroundWrapper.swift in Sources */,
 				72940CA52C9028C800311CE8 /* MainView.swift in Sources */,
 				72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */,
 				72940D172C98424800311CE8 /* CalendarCell.swift in Sources */,
 				72940D1F2C9A780A00311CE8 /* RecodeView.swift in Sources */,
 				72940D1A2C98432700311CE8 /* CalendarViewModel.swift in Sources */,
+				72940D262C9D457500311CE8 /* CustomTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
