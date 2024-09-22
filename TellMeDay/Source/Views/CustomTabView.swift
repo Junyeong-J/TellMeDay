@@ -24,12 +24,12 @@ struct CustomTabView: View {
                     .tag(Tab.calendar)
                     
                     NavigationStack {
-                        RecodeView()
+                        RecodeView(selectedDate: Date())
                     }
                     .tag(Tab.chart)
                     
                     NavigationStack {
-                        RecodeView()
+                        RecodeView(selectedDate: Date())
                     }
                     .tag(Tab.myRecode)
                     

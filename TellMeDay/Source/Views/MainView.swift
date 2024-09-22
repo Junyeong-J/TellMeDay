@@ -25,7 +25,7 @@ struct MainView: View {
                 set: { _ in selectedDate = nil }
             )) {
                 if let date = selectedDate {
-                    RecodeView()
+                    RecodeView(selectedDate: date)
                 }
             }
         }

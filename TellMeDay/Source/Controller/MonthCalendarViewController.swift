@@ -46,7 +46,11 @@ final class MonthCalendarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        for fontFamily in UIFont.familyNames {
+//            for fontName in UIFont.fontNames(forFamilyName: fontFamily) {
+//                print(fontName)
+//            }
+//        }
         setupMonthView()
         settingCalendar()
         setupLayout()

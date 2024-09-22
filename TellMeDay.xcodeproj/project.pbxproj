@@ -23,6 +23,10 @@
 		72940D262C9D457500311CE8 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D252C9D457500311CE8 /* CustomTabView.swift */; };
 		72940D282C9EA86C00311CE8 /* VoiceRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */; };
 		72940D2B2C9EAA0D00311CE8 /* ForegroundWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D2A2C9EAA0D00311CE8 /* ForegroundWrapper.swift */; };
+		72940D2E2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72940D2D2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf */; };
+		72940D312C9FEBE300311CE8 /* ResourceFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D302C9FEBE300311CE8 /* ResourceFonts.swift */; };
+		72940D342CA05DEF00311CE8 /* TitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D332CA05DEF00311CE8 /* TitleTextField.swift */; };
+		72940D362CA064DE00311CE8 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D352CA064DE00311CE8 /* SpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +56,11 @@
 		72940D252C9D457500311CE8 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordingView.swift; sourceTree = "<group>"; };
 		72940D2A2C9EAA0D00311CE8 /* ForegroundWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundWrapper.swift; sourceTree = "<group>"; };
+		72940D2D2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "나눔손글씨 규리의 일기.ttf"; sourceTree = "<group>"; };
+		72940D2F2C9FEACA00311CE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		72940D302C9FEBE300311CE8 /* ResourceFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFonts.swift; sourceTree = "<group>"; };
+		72940D332CA05DEF00311CE8 /* TitleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextField.swift; sourceTree = "<group>"; };
+		72940D352CA064DE00311CE8 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +97,7 @@
 		72940CA12C9028C800311CE8 /* TellMeDay */ = {
 			isa = PBXGroup;
 			children = (
+				72940D2F2C9FEACA00311CE8 /* Info.plist */,
 				72940D082C982D7900311CE8 /* Source */,
 				72940D092C982D7E00311CE8 /* Resource */,
 				72940CA82C9028C900311CE8 /* Preview Content */,
@@ -119,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				72940CA62C9028C900311CE8 /* Assets.xcassets */,
+				72940D2C2C9FEA0900311CE8 /* Fonts */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -136,8 +147,7 @@
 			children = (
 				72940D252C9D457500311CE8 /* CustomTabView.swift */,
 				72940CA42C9028C800311CE8 /* MainView.swift */,
-				72940D1E2C9A780A00311CE8 /* RecodeView.swift */,
-				72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */,
+				72940D322CA05DC000311CE8 /* RecodeView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -173,6 +183,26 @@
 				72940D2A2C9EAA0D00311CE8 /* ForegroundWrapper.swift */,
 			);
 			path = Wrappers;
+			sourceTree = "<group>";
+		};
+		72940D2C2C9FEA0900311CE8 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				72940D302C9FEBE300311CE8 /* ResourceFonts.swift */,
+				72940D2D2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		72940D322CA05DC000311CE8 /* RecodeView */ = {
+			isa = PBXGroup;
+			children = (
+				72940D1E2C9A780A00311CE8 /* RecodeView.swift */,
+				72940D332CA05DEF00311CE8 /* TitleTextField.swift */,
+				72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */,
+				72940D352CA064DE00311CE8 /* SpeechRecognizer.swift */,
+			);
+			path = RecodeView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72940CAA2C9028C900311CE8 /* Preview Assets.xcassets in Resources */,
+				72940D2E2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf in Resources */,
 				72940CA72C9028C900311CE8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,7 +292,10 @@
 				72940D112C98373900311CE8 /* MonthCalendarViewController.swift in Sources */,
 				72940D282C9EA86C00311CE8 /* VoiceRecordingView.swift in Sources */,
 				72940D2B2C9EAA0D00311CE8 /* ForegroundWrapper.swift in Sources */,
+				72940D342CA05DEF00311CE8 /* TitleTextField.swift in Sources */,
 				72940CA52C9028C800311CE8 /* MainView.swift in Sources */,
+				72940D362CA064DE00311CE8 /* SpeechRecognizer.swift in Sources */,
+				72940D312C9FEBE300311CE8 /* ResourceFonts.swift in Sources */,
 				72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */,
 				72940D172C98424800311CE8 /* CalendarCell.swift in Sources */,
 				72940D1F2C9A780A00311CE8 /* RecodeView.swift in Sources */,
@@ -403,11 +437,12 @@
 				DEVELOPMENT_TEAM = QQN262X7KM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TellMeDay/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -437,11 +472,12 @@
 				DEVELOPMENT_TEAM = QQN262X7KM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TellMeDay/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
