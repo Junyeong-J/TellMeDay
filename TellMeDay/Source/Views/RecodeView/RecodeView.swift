@@ -113,7 +113,7 @@ struct RecodeView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: VoiceRecordingView()) {
+                NavigationLink(destination: VoiceRecordingView(selectedDate: Date())) {
                     Image(systemName: "arrowshape.right.circle")
                         .resizable()
                         .frame(width: 30, height: 30)
