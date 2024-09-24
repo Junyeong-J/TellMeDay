@@ -31,6 +31,7 @@
 		72940D552CA1C6B300311CE8 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D542CA1C6B300311CE8 /* ViewModelType.swift */; };
 		72940D572CA3059000311CE8 /* VoiceDiaryRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D562CA3059000311CE8 /* VoiceDiaryRecordingView.swift */; };
 		72940D592CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D582CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift */; };
+		72940D5C2CA30B6100311CE8 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D5B2CA30B6100311CE8 /* DateHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,6 +70,7 @@
 		72940D542CA1C6B300311CE8 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		72940D562CA3059000311CE8 /* VoiceDiaryRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDiaryRecordingView.swift; sourceTree = "<group>"; };
 		72940D582CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDiaryRecordingViewModel.swift; sourceTree = "<group>"; };
+		72940D5B2CA30B6100311CE8 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				72940D0A2C982DA400311CE8 /* App */,
+				72940D5A2CA30B3F00311CE8 /* CustomModifier */,
 				72940D532CA1C69C00311CE8 /* Protocol */,
 				72940D292C9EA9EE00311CE8 /* Wrappers */,
 				72940D0B2C982DB300311CE8 /* Views */,
@@ -223,6 +226,14 @@
 				72940D542CA1C6B300311CE8 /* ViewModelType.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		72940D5A2CA30B3F00311CE8 /* CustomModifier */ = {
+			isa = PBXGroup;
+			children = (
+				72940D5B2CA30B6100311CE8 /* DateHeaderView.swift */,
+			);
+			path = CustomModifier;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +335,7 @@
 				72940D172C98424800311CE8 /* CalendarCell.swift in Sources */,
 				72940D1F2C9A780A00311CE8 /* RecodeView.swift in Sources */,
 				72940D1A2C98432700311CE8 /* CalendarViewModel.swift in Sources */,
+				72940D5C2CA30B6100311CE8 /* DateHeaderView.swift in Sources */,
 				72940D262C9D457500311CE8 /* CustomTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
