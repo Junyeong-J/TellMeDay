@@ -15,15 +15,15 @@ private struct DateHeaderView: ViewModifier {
         HStack {
             Rectangle()
                 .frame(height: 1)
-                .foregroundColor(.gray)
+                .asForeground(.appGrayAndWhite)
             
             Text(dateText)
-                .font(Font.customFont(name: CustomFont.gyuri, size: 25))
-                .asForeground(.black)
+                .font(Font.customFont(name: CustomFont.gyuri, size: 32))
+                .asForeground(.appGrayAndWhite)
             
             Rectangle()
                 .frame(height: 1)
-                .foregroundColor(.gray)
+                .asForeground(.appGrayAndWhite)
         }
         .padding(.horizontal)
     }

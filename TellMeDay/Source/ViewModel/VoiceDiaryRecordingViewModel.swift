@@ -54,7 +54,7 @@ extension VoiceDiaryRecordingViewModel {
     }
     
     func transform() {
-        output.selectedDate = formattedDate(input.selectedDate)
+        output.selectedDate = FormatterManager.shared.recodingDateHeader(input.selectedDate)
         
         input.playButtonTapped
             .sink { [weak self] _ in
@@ -80,12 +80,6 @@ extension VoiceDiaryRecordingViewModel {
             }
             .store(in: &cancellables)
         
-    }
-    
-    private func formattedDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy. MM. dd"
-        return formatter.string(from: date)
     }
     
     private func togglePlayPause() {

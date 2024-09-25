@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     
     @State private var selectedDate: Date? = nil
+    @State var firstNaviLinkActive = false
     
     var body: some View {
         
@@ -20,13 +21,12 @@ struct MainView: View {
                     .frame(height: 450)
                     .padding()
             }
-//            .background(Color.appBaseBackground)
             .navigationDestination(isPresented: Binding(
                 get: { selectedDate != nil },
                 set: { _ in selectedDate = nil }
             )) {
                 if let date = selectedDate {
-                    RecodeView(selectedDate: date)
+                    RecodingView(selectedDate: date, firstNaviLinkActive: $firstNaviLinkActive)
                 }
             }
             

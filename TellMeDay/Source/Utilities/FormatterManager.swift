@@ -26,4 +26,10 @@ final class FormatterManager {
         formatter.locale = Locale(identifier: "ko_KR")
         return formatter
     }
+    
+    func recodingDateHeader(_ date: Date) -> String {
+        formatter.dateFormat = "yyyy.MM.dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: date)
+    }
 }
