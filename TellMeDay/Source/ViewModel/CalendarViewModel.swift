@@ -5,7 +5,6 @@
 //  Created by 전준영 on 9/16/24.
 //
 
-import Foundation
 import UIKit
 
 final class CalendarViewModel {
@@ -14,7 +13,7 @@ final class CalendarViewModel {
     var previousSelectedDate: Date? = nil
     
     func fetchArtwork(_ date: Date, completion: @escaping (UIImage?) -> Void) {
-        let imageURL = UIImage(systemName: "star")
+        let imageURL = UIImage(systemName: "star")?.withTintColor(.appMain, renderingMode: .alwaysOriginal)
         completion(imageURL)
     }
     

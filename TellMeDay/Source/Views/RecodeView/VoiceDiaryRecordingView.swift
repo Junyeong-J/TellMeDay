@@ -35,7 +35,7 @@ struct VoiceDiaryRecordingView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .padding(.bottom, 10)
-                            .offset(y: viewModel.output.timerPosition ? geometry.size.height * 0.3 : 0)
+                            .offset(y: viewModel.output.timerPosition ? geometry.size.height * 0.2 : 0)
                             .animation(.easeOut, value: viewModel.output.isPlaying)
                         
                         HStack(spacing: 20) {
@@ -50,7 +50,7 @@ struct VoiceDiaryRecordingView: View {
                                         .frame(width: 50, height: 50)
                                         .foregroundColor(.black)
                                 }
-                                .offset(y: viewModel.output.isPlaying || viewModel.output.showStopButton ? geometry.size.height * 0.3 : 0)
+                                .offset(y: viewModel.output.isPlaying || viewModel.output.showStopButton ? geometry.size.height * 0.2 : 0)
                                 .animation(.easeOut, value: viewModel.output.isPlaying)
                             }
                             
@@ -65,7 +65,7 @@ struct VoiceDiaryRecordingView: View {
                                         .frame(width: 50, height: 50)
                                         .foregroundColor(.red)
                                 }
-                                .offset(y: geometry.size.height * 0.3)
+                                .offset(y: geometry.size.height * 0.2)
                                 .animation(.easeOut, value: viewModel.output.showStopButton)
                             }
                             
@@ -80,10 +80,21 @@ struct VoiceDiaryRecordingView: View {
                                         .frame(width: 50, height: 50)
                                         .foregroundColor(.black)
                                 }
-                                .offset(y: geometry.size.height * 0.3)
+                                .offset(y: geometry.size.height * 0.2)
                                 .animation(.easeOut, value: viewModel.output.isPlaying)
                             }
                         }
+                        
+//                        Button(action: {
+//                            print(viewModel.output.transcript)
+//                        }) {
+//                            Text("STT 결과 출력")
+//                                .font(.headline)
+//                                .padding()
+//                                .background(Color.blue)
+//                                .foregroundColor(.white)
+//                                .cornerRadius(10)
+//                        }
                     }
                     Spacer()
                     

@@ -8,8 +8,6 @@
 import SwiftUI
 import UIKit
 import FSCalendar
-import SnapKit
-import Kingfisher
 
 struct MonthCalendarViewControllerWrapper: UIViewControllerRepresentable {
     
@@ -28,89 +26,33 @@ struct MonthCalendarViewControllerWrapper: UIViewControllerRepresentable {
     }
 }
 
-final class MonthCalendarViewController: UIViewController {
-
-    var calendar = FSCalendar()
-    var viewModel = CalendarViewModel()
-    var currentPageDate: Date?
-    var monthView: UIView = UIView()
-    var headerLabel: UILabel = UILabel()
+final class MonthCalendarViewController: BaseViewController<MonthCalendarView> {
+    
+    private var viewModel = CalendarViewModel()
+    private var currentPageDate: Date?
     var onDateSelected: ((Date) -> Void)?
-
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM"
-        formatter.locale = Locale(identifier: "ko_KR")
-        return formatter
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        for fontFamily in UIFont.familyNames {
-//            for fontName in UIFont.fontNames(forFamilyName: fontFamily) {
-//                print(fontName)
-//            }
-//        }
-        setupMonthView()
         settingCalendar()
-        setupLayout()
+        setupMonthView()
+        rootView.calendar.reloadData()
     }
 
-    func setupMonthView() {
-        view.addSubview(monthView)
-        monthView.addSubview(headerLabel)
-
-        headerLabel.textAlignment = .center
-        headerLabel.font = UIFont.boldSystemFont(ofSize: 24)
-
-        monthView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.equalTo(view)
-            make.height.equalTo(60)
+    private func setupMonthView() {
+        if let selectedDate = rootView.calendar.selectedDate {
+            currentPageDate = selectedDate
+        } else {
+            currentPageDate = Date()
         }
-
-        headerLabel.snp.makeConstraints { make in
-            make.edges.equalTo(monthView)
-        }
-
-        currentPageDate = calendar.currentPage
-        headerLabel.text = dateFormatter.string(from: currentPageDate ?? Date())
-    }
-
-    func settingCalendar() {
-        calendar.register(CalendarCell.self, forCellReuseIdentifier: CalendarCell.description())
-        
-        calendar.delegate = self
-        calendar.dataSource = self
-        
-        calendar.setCurrentPage(Date(), animated: true)
-        calendar.select(Date())
-        
-        calendar.appearance.headerTitleColor = .clear
-        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
-        calendar.headerHeight = 66
-        
-        calendar.today = nil
-        calendar.scrollDirection = .horizontal
-        calendar.locale = Locale(identifier: "ko_KR")
-        calendar.scope = .month
-        calendar.translatesAutoresizingMaskIntoConstraints = false
-        calendar.appearance.titleSelectionColor = .lightGray.withAlphaComponent(0.5)
-        calendar.appearance.selectionColor = .clear
-        calendar.appearance.weekdayFont = .boldSystemFont(ofSize: 14)
-        calendar.appearance.caseOptions = .weekdayUsesSingleUpperCase
-        calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.titleFont = .boldSystemFont(ofSize: 12)
-        calendar.weekdayHeight = 15
-        calendar.placeholderType = .fillSixRows
+        rootView.headerLabel.text = FormatterManager.shared.mainViewDateHeader().string(from: currentPageDate ?? Date())
     }
     
-    private func setupLayout() {
-        view.addSubview(calendar)
-        calendar.snp.makeConstraints { make in
-            make.top.equalTo(monthView.snp.bottom)
-            make.leading.trailing.bottom.equalTo(view)
-        }
+    private func settingCalendar() {
+        rootView.calendar.register(CalendarCell.self, forCellReuseIdentifier: CalendarCell.description())
+        
+        rootView.calendar.delegate = self
+        rootView.calendar.dataSource = self
     }
 }
 
@@ -158,7 +100,7 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         currentPageDate = calendar.currentPage
-        headerLabel.text = dateFormatter.string(from: currentPageDate ?? Date())
+        rootView.headerLabel.text = FormatterManager.shared.mainViewDateHeader().string(from: currentPageDate ?? Date())
         calendar.reloadData()
     }
     

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum IconImageName: String {
+    case calendar = "calendar"
+    case chart = "chart.bar"
+    case myRecode = "note.text"
+    case settings = "gearshape"
+}

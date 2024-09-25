@@ -11,7 +11,7 @@ import SwiftUI
 struct TellMeDayApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            CustomTabView()
         }
     }
 }

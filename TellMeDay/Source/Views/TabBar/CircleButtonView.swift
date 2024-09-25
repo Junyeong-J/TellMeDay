@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct CircleButtonView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    var action: () -> Void = {}
 
-#Preview {
-    CircleButtonView()
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: "pencil.circle.fill")
+                .resizable()
+                .frame(width: 50, height: 50)
+                .foregroundColor(.appMain)
+        }
+        .background(
+            Circle()
+                .fill(Color.white)
+                .shadow(color: .appMain.opacity(0.15), radius: 8, y: 2)
+        )
+    }
 }

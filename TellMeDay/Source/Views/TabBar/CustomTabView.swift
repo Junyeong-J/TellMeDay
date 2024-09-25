@@ -88,25 +88,6 @@ struct CustomTabView: View {
     
 }
 
-struct CircleButtonView: View {
-    var body: some View {
-        Button(action: {
-            
-        }) {
-            Image(systemName: "pencil.circle.fill")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .foregroundColor(.appMain)
-        }
-        
-        .background(
-            Circle()
-                .fill(Color.white)
-                .shadow(color: .appMain.opacity(0.15), radius: 8, y: 2)
-        )
-    }
-}
-
 struct CustomTabBarShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()

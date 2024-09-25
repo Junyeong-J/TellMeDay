@@ -14,12 +14,13 @@ struct MainView: View {
     var body: some View {
         
         NavigationStack {
+            
             VStack {
                 MonthCalendarViewControllerWrapper(selectedDate: $selectedDate)
                     .frame(height: 450)
                     .padding()
             }
-            
+//            .background(Color.appBaseBackground)
             .navigationDestination(isPresented: Binding(
                 get: { selectedDate != nil },
                 set: { _ in selectedDate = nil }
@@ -28,8 +29,10 @@ struct MainView: View {
                     RecodeView(selectedDate: date)
                 }
             }
+            
+            Spacer()
         }
-        
+        .background(Color.appBaseBackground)
     }
 }
 

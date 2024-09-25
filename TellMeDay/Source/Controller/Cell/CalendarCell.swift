@@ -53,5 +53,3 @@ class CalendarCell: FSCalendarCell {
         return (width > height) ? height : width
     }
 }
-
-

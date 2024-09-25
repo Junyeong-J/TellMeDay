@@ -7,12 +7,26 @@
 
 import SwiftUI
 
-struct TabIconView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+private struct TabIconView: ViewModifier {
+    
+    var isSelected: Bool
+    var systemName: String
+    
+    func body(content: Content) -> some View {
+        VStack(alignment: .center) {
+            Image(systemName: systemName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 22)
+        }
+        .foregroundStyle(isSelected ? Color.appMain : Color.gray)
+        .padding()
+        .offset(y: -20)
     }
 }
 
-#Preview {
-    TabIconView()
+extension View {
+    func tabIconView(isSelected: Bool, systemName: String) -> some View {
+        self.modifier(TabIconView(isSelected: isSelected, systemName: systemName))
+    }
 }
