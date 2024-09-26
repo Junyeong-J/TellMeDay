@@ -12,7 +12,6 @@ struct RecodingView: View {
     let selectedDate: Date
     
     @Environment(\.dismiss) var dismiss
-    @Binding var firstNaviLinkActive: Bool
     @StateObject private var viewModel = RecodingViewModel()
     let categories = ["일상생활", "영화", "여행", "기타"]
     
@@ -74,7 +73,7 @@ struct RecodingView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: VoiceDiaryRecordingView(firstNaviLinkActive: $firstNaviLinkActive)) {
+                NavigationLink(destination: VoiceDiaryRecordingView()) {
                     Image(systemName: "arrowshape.right.circle")
                         .resizable()
                         .frame(width: 30, height: 30)

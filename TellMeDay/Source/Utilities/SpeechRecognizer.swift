@@ -15,6 +15,7 @@ final class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDele
     private let audioEngine = AVAudioEngine()
     
     @Published var transcript = ""
+    private var accumulatedTranscript = ""
     private var isTranscribing = false
     
     override init() {
@@ -52,6 +53,8 @@ final class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDele
         
         recognitionRequest.shouldReportPartialResults = true
         
+        transcript = accumulatedTranscript
+        
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { [weak self] result, error in
             guard let strongSelf = self else { return }
             
@@ -59,7 +62,7 @@ final class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDele
             
             if let result = result {
                 DispatchQueue.main.async {
-                    strongSelf.transcript = result.bestTranscription.formattedString
+                    strongSelf.transcript = strongSelf.accumulatedTranscript + result.bestTranscription.formattedString
                 }
                 isFinal = result.isFinal
             }
@@ -70,6 +73,8 @@ final class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDele
         }
         
         let recordingFormat = audioEngine.inputNode.outputFormat(forBus: 0)
+        
+        audioEngine.inputNode.removeTap(onBus: 0)
         audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
             recognitionRequest.append(buffer)
         }
@@ -81,11 +86,20 @@ final class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDele
             cleanup()
         }
     }
-    
+
     func stopTranscribing() {
-        recognitionTask?.cancel()
-        cleanup()
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            recognitionTask?.cancel()
+        }
+        
+        accumulatedTranscript = transcript
+        
+        recognitionRequest = nil
+        recognitionTask = nil
     }
+
     
     private func cleanup() {
         if audioEngine.isRunning {
@@ -96,5 +110,13 @@ final class SpeechRecognizer: NSObject, ObservableObject, SFSpeechRecognizerDele
         recognitionRequest = nil
         recognitionTask = nil
         isTranscribing = false
+    }
+    
+    func resumeTranscribing() {
+        guard isTranscribing else { return }
+        
+        if !audioEngine.isRunning {
+            try? audioEngine.start()
+        }
     }
 }

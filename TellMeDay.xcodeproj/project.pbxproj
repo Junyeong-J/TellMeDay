@@ -18,6 +18,8 @@
 		7207899D2CA478910053BE8B /* RecodingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7207899C2CA478910053BE8B /* RecodingView.swift */; };
 		720789A12CA479C80053BE8B /* DateRecodingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789A02CA479C80053BE8B /* DateRecodingView.swift */; };
 		720789A32CA47EE00053BE8B /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789A22CA47EE00053BE8B /* CategoriesView.swift */; };
+		720789A82CA5565A0053BE8B /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789A72CA5565A0053BE8B /* RealmModel.swift */; };
+		720789AC2CA5A6F20053BE8B /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789AB2CA5A6F20053BE8B /* AudioRecorderManager.swift */; };
 		72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA22C9028C800311CE8 /* TellMeDayApp.swift */; };
 		72940CA52C9028C800311CE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA42C9028C800311CE8 /* MainView.swift */; };
 		72940CA72C9028C900311CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72940CA62C9028C900311CE8 /* Assets.xcassets */; };
@@ -31,13 +33,11 @@
 		72940D222C9C018800311CE8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 72940D212C9C018800311CE8 /* RealmSwift */; };
 		72940D232C9C019600311CE8 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 72940D212C9C018800311CE8 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		72940D262C9D457500311CE8 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D252C9D457500311CE8 /* CustomTabView.swift */; };
-		72940D282C9EA86C00311CE8 /* VoiceRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */; };
 		72940D2B2C9EAA0D00311CE8 /* ForegroundWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D2A2C9EAA0D00311CE8 /* ForegroundWrapper.swift */; };
 		72940D2E2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72940D2D2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf */; };
 		72940D312C9FEBE300311CE8 /* ResourceFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D302C9FEBE300311CE8 /* ResourceFonts.swift */; };
 		72940D342CA05DEF00311CE8 /* TitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D332CA05DEF00311CE8 /* TitleTextField.swift */; };
 		72940D362CA064DE00311CE8 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D352CA064DE00311CE8 /* SpeechRecognizer.swift */; };
-		72940D522CA1C68C00311CE8 /* VoiceRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D512CA1C68C00311CE8 /* VoiceRecordingViewModel.swift */; };
 		72940D552CA1C6B300311CE8 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D542CA1C6B300311CE8 /* ViewModelType.swift */; };
 		72940D572CA3059000311CE8 /* VoiceDiaryRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D562CA3059000311CE8 /* VoiceDiaryRecordingView.swift */; };
 		72940D592CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D582CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift */; };
@@ -70,6 +70,8 @@
 		7207899C2CA478910053BE8B /* RecodingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodingView.swift; sourceTree = "<group>"; };
 		720789A02CA479C80053BE8B /* DateRecodingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRecodingView.swift; sourceTree = "<group>"; };
 		720789A22CA47EE00053BE8B /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		720789A72CA5565A0053BE8B /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		720789AB2CA5A6F20053BE8B /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
 		72940C9F2C9028C800311CE8 /* TellMeDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72940CA22C9028C800311CE8 /* TellMeDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeDayApp.swift; sourceTree = "<group>"; };
 		72940CA42C9028C800311CE8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -79,14 +81,12 @@
 		72940D162C98424800311CE8 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		72940D192C98432700311CE8 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		72940D252C9D457500311CE8 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
-		72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordingView.swift; sourceTree = "<group>"; };
 		72940D2A2C9EAA0D00311CE8 /* ForegroundWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundWrapper.swift; sourceTree = "<group>"; };
 		72940D2D2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "나눔손글씨 규리의 일기.ttf"; sourceTree = "<group>"; };
 		72940D2F2C9FEACA00311CE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		72940D302C9FEBE300311CE8 /* ResourceFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFonts.swift; sourceTree = "<group>"; };
 		72940D332CA05DEF00311CE8 /* TitleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextField.swift; sourceTree = "<group>"; };
 		72940D352CA064DE00311CE8 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
-		72940D512CA1C68C00311CE8 /* VoiceRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordingViewModel.swift; sourceTree = "<group>"; };
 		72940D542CA1C6B300311CE8 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		72940D562CA3059000311CE8 /* VoiceDiaryRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDiaryRecordingView.swift; sourceTree = "<group>"; };
 		72940D582CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDiaryRecordingViewModel.swift; sourceTree = "<group>"; };
@@ -112,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				720789872CA41F980053BE8B /* FormatterManager.swift */,
+				72940D352CA064DE00311CE8 /* SpeechRecognizer.swift */,
+				720789AB2CA5A6F20053BE8B /* AudioRecorderManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -175,6 +177,14 @@
 			path = RecodingView;
 			sourceTree = "<group>";
 		};
+		720789A62CA556250053BE8B /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				720789A72CA5565A0053BE8B /* RealmModel.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
 		72940C962C9028C800311CE8 = {
 			isa = PBXGroup;
 			children = (
@@ -213,9 +223,10 @@
 		72940D082C982D7900311CE8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				72940D0A2C982DA400311CE8 /* App */,
+				720789A62CA556250053BE8B /* DataBase */,
 				720789932CA4548A0053BE8B /* Constants */,
 				720789892CA422A50053BE8B /* Base */,
-				72940D0A2C982DA400311CE8 /* App */,
 				720789862CA41F850053BE8B /* Utilities */,
 				72940D5A2CA30B3F00311CE8 /* CustomModifier */,
 				72940D532CA1C69C00311CE8 /* Protocol */,
@@ -277,7 +288,6 @@
 			children = (
 				72940D192C98432700311CE8 /* CalendarViewModel.swift */,
 				7207899A2CA478310053BE8B /* RecodeViewModel.swift */,
-				72940D512CA1C68C00311CE8 /* VoiceRecordingViewModel.swift */,
 				72940D582CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift */,
 			);
 			path = ViewModel;
@@ -305,8 +315,6 @@
 			children = (
 				7207899C2CA478910053BE8B /* RecodingView.swift */,
 				72940D332CA05DEF00311CE8 /* TitleTextField.swift */,
-				72940D272C9EA86C00311CE8 /* VoiceRecordingView.swift */,
-				72940D352CA064DE00311CE8 /* SpeechRecognizer.swift */,
 				72940D562CA3059000311CE8 /* VoiceDiaryRecordingView.swift */,
 			);
 			path = RecodeView;
@@ -415,14 +423,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				72940D112C98373900311CE8 /* MonthCalendarViewController.swift in Sources */,
-				72940D282C9EA86C00311CE8 /* VoiceRecordingView.swift in Sources */,
+				720789A82CA5565A0053BE8B /* RealmModel.swift in Sources */,
 				720789A12CA479C80053BE8B /* DateRecodingView.swift in Sources */,
 				72940D2B2C9EAA0D00311CE8 /* ForegroundWrapper.swift in Sources */,
 				720789922CA4525F0053BE8B /* TabIconView.swift in Sources */,
 				72940D342CA05DEF00311CE8 /* TitleTextField.swift in Sources */,
-				72940D522CA1C68C00311CE8 /* VoiceRecordingViewModel.swift in Sources */,
 				7207898D2CA422C10053BE8B /* BaseViewController.swift in Sources */,
 				720789A32CA47EE00053BE8B /* CategoriesView.swift in Sources */,
+				720789AC2CA5A6F20053BE8B /* AudioRecorderManager.swift in Sources */,
 				72940CA52C9028C800311CE8 /* MainView.swift in Sources */,
 				720789882CA41F980053BE8B /* FormatterManager.swift in Sources */,
 				72940D572CA3059000311CE8 /* VoiceDiaryRecordingView.swift in Sources */,
@@ -578,6 +586,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TellMeDay/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "미디어 라이브러리 접근 권한을 요청합니다.";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "파일 시스템 접근 권한을 요청합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "앱에서 음성 인식을 사용하기 위해 음성 인식 기능에 접근이 필요합니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "앱에서 음성 녹음을 사용하기 위해 마이크에 접근이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -615,6 +625,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TellMeDay/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "미디어 라이브러리 접근 권한을 요청합니다.";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "파일 시스템 접근 권한을 요청합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "앱에서 음성 인식을 사용하기 위해 음성 인식 기능에 접근이 필요합니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "앱에서 음성 녹음을 사용하기 위해 마이크에 접근이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

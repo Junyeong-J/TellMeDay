@@ -10,8 +10,8 @@ import SwiftUI
 struct VoiceDiaryRecordingView: View {
     
     @StateObject private var viewModel = VoiceDiaryRecordingViewModel()
+    @StateObject private var audioRecorderManager = AudioRecorderManager()
     @Environment(\.dismiss) var dismiss
-    @Binding var firstNaviLinkActive: Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -21,20 +21,24 @@ struct VoiceDiaryRecordingView: View {
                 VStack(spacing: 10) {
                     
                     TextEditor(text: $viewModel.output.transcript)
+                        .font(Font.customFont(name: CustomFont.gyuri, size: 20))
                         .padding()
-                        .background(Color(.systemGray6))
+                        .background(.appBaseBackground)
                         .cornerRadius(8)
-                        .frame(height: 200)
+                        .frame(height: geometry.size.height * 0.45)
                         .padding(.horizontal, 20)
                         .transition(.opacity)
                         .animation(.easeInOut, value: viewModel.output.isPlaying)
+                        .onChange(of: viewModel.output.transcript) { newValue in
+                            if newValue.count > 10 {
+                                viewModel.output.transcript = String(newValue.prefix(1000))
+                            }
+                        }
                     
                     Text(viewModel.output.timerText)
                         .font(.largeTitle)
-                        .fontWeight(.bold)
                         .padding(.bottom, 10)
                         .asForeground(.appBlackAndWhite)
-                        .offset(y: viewModel.output.timerPosition ? geometry.size.height * 0.18 : 0)
                         .animation(.easeOut, value: viewModel.output.isPlaying)
                     
                     HStack(spacing: 20) {
@@ -49,7 +53,6 @@ struct VoiceDiaryRecordingView: View {
                                     .frame(width: 50, height: 50)
                                     .asForeground(.appBlackAndWhite)
                             }
-                            .offset(y: viewModel.output.isPlaying || viewModel.output.showStopButton ? geometry.size.height * 0.18 : 0)
                             .animation(.easeOut, value: viewModel.output.isPlaying)
                         }
                         
@@ -64,7 +67,6 @@ struct VoiceDiaryRecordingView: View {
                                     .frame(width: 50, height: 50)
                                     .asForeground(.red)
                             }
-                            .offset(y: geometry.size.height * 0.18)
                             .animation(.easeOut, value: viewModel.output.showStopButton)
                         }
                         
@@ -79,7 +81,6 @@ struct VoiceDiaryRecordingView: View {
                                     .frame(width: 50, height: 50)
                                     .asForeground(.appBlackAndWhite)
                             }
-                            .offset(y: geometry.size.height * 0.18)
                             .animation(.easeOut, value: viewModel.output.isPlaying)
                         }
                     }
@@ -87,10 +88,10 @@ struct VoiceDiaryRecordingView: View {
                 Spacer()
                 
                 Text("""
-                        최대 녹음 시간은 3분입니다.
-                        녹음 파일은 앱의 'Documents' 폴더에 저장됩니다.
-                        녹음 파일을 직접 삭제할 경우, 앱에서 파일을 재생할 수 없습니다.
-                        """)
+                    최대 녹음 시간은 3분입니다.
+                    음성 텍스트(STT)는 최대 1000자까지 저장되며, 1000자가 초과되면 더 이상 텍스트로 변환되지 않습니다.
+                    그러나 녹음은 계속 진행되며, 파일은 자동으로 앱의 'Documents' 폴더에 저장됩니다.
+                    """)
                 .font(.subheadline)
                 .foregroundColor(.gray)
                 .padding(.horizontal)
@@ -109,7 +110,7 @@ struct VoiceDiaryRecordingView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        firstNaviLinkActive = false
+                        
                     }) {
                         Text("저장")
                             .font(.headline)
@@ -122,9 +123,9 @@ struct VoiceDiaryRecordingView: View {
             }
         }
     }
-
+    
 }
 
-//#Preview {
-//    VoiceDiaryRecordingView()
-//}
+#Preview {
+    VoiceDiaryRecordingView()
+}

@@ -10,7 +10,6 @@ import SwiftUI
 struct MainView: View {
     
     @State private var selectedDate: Date? = nil
-    @State var firstNaviLinkActive = false
     
     var body: some View {
         
@@ -26,7 +25,7 @@ struct MainView: View {
                 set: { _ in selectedDate = nil }
             )) {
                 if let date = selectedDate {
-                    RecodingView(selectedDate: date, firstNaviLinkActive: $firstNaviLinkActive)
+                    RecodingView(selectedDate: date)
                 }
             }
             
