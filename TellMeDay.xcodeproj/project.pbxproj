@@ -20,6 +20,9 @@
 		720789A32CA47EE00053BE8B /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789A22CA47EE00053BE8B /* CategoriesView.swift */; };
 		720789A82CA5565A0053BE8B /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789A72CA5565A0053BE8B /* RealmModel.swift */; };
 		720789AC2CA5A6F20053BE8B /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789AB2CA5A6F20053BE8B /* AudioRecorderManager.swift */; };
+		720789BB2CA6FF310053BE8B /* AnalysisResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789BA2CA6FF310053BE8B /* AnalysisResultView.swift */; };
+		720789BE2CA705380053BE8B /* AnalyzeSentimentNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789BD2CA705380053BE8B /* AnalyzeSentimentNetwork.swift */; };
+		720789C02CA70B4B0053BE8B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 720789BF2CA70B4B0053BE8B /* .gitignore */; };
 		72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA22C9028C800311CE8 /* TellMeDayApp.swift */; };
 		72940CA52C9028C800311CE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA42C9028C800311CE8 /* MainView.swift */; };
 		72940CA72C9028C900311CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72940CA62C9028C900311CE8 /* Assets.xcassets */; };
@@ -72,6 +75,9 @@
 		720789A22CA47EE00053BE8B /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		720789A72CA5565A0053BE8B /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		720789AB2CA5A6F20053BE8B /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
+		720789BA2CA6FF310053BE8B /* AnalysisResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisResultView.swift; sourceTree = "<group>"; };
+		720789BD2CA705380053BE8B /* AnalyzeSentimentNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeSentimentNetwork.swift; sourceTree = "<group>"; };
+		720789BF2CA70B4B0053BE8B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		72940C9F2C9028C800311CE8 /* TellMeDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72940CA22C9028C800311CE8 /* TellMeDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeDayApp.swift; sourceTree = "<group>"; };
 		72940CA42C9028C800311CE8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 		720789B82CA6F6660053BE8B /* ResultView */ = {
 			isa = PBXGroup;
 			children = (
+				720789BA2CA6FF310053BE8B /* AnalysisResultView.swift */,
 			);
 			path = ResultView;
 			sourceTree = "<group>";
@@ -200,9 +207,18 @@
 			path = MainView;
 			sourceTree = "<group>";
 		};
+		720789BC2CA7051F0053BE8B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				720789BD2CA705380053BE8B /* AnalyzeSentimentNetwork.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		72940C962C9028C800311CE8 = {
 			isa = PBXGroup;
 			children = (
+				720789BF2CA70B4B0053BE8B /* .gitignore */,
 				72940CA12C9028C800311CE8 /* TellMeDay */,
 				72940CA02C9028C800311CE8 /* Products */,
 			);
@@ -238,6 +254,7 @@
 		72940D082C982D7900311CE8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				720789BC2CA7051F0053BE8B /* Network */,
 				72940D0A2C982DA400311CE8 /* App */,
 				720789A62CA556250053BE8B /* DataBase */,
 				720789932CA4548A0053BE8B /* Constants */,
@@ -425,6 +442,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				720789C02CA70B4B0053BE8B /* .gitignore in Resources */,
 				72940CAA2C9028C900311CE8 /* Preview Assets.xcassets in Resources */,
 				72940D2E2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf in Resources */,
 				72940CA72C9028C900311CE8 /* Assets.xcassets in Resources */,
@@ -451,6 +469,7 @@
 				720789882CA41F980053BE8B /* FormatterManager.swift in Sources */,
 				72940D572CA3059000311CE8 /* VoiceDiaryRecordingView.swift in Sources */,
 				72940D552CA1C6B300311CE8 /* ViewModelType.swift in Sources */,
+				720789BB2CA6FF310053BE8B /* AnalysisResultView.swift in Sources */,
 				7207898F2CA4230E0053BE8B /* MonthCalendarView.swift in Sources */,
 				72940D362CA064DE00311CE8 /* SpeechRecognizer.swift in Sources */,
 				7207899D2CA478910053BE8B /* RecodingView.swift in Sources */,
@@ -458,6 +477,7 @@
 				7207899B2CA478310053BE8B /* RecodeViewModel.swift in Sources */,
 				72940D312C9FEBE300311CE8 /* ResourceFonts.swift in Sources */,
 				72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */,
+				720789BE2CA705380053BE8B /* AnalyzeSentimentNetwork.swift in Sources */,
 				72940D172C98424800311CE8 /* CalendarCell.swift in Sources */,
 				720789992CA456890053BE8B /* CircleButtonView.swift in Sources */,
 				72940D1A2C98432700311CE8 /* CalendarViewModel.swift in Sources */,
