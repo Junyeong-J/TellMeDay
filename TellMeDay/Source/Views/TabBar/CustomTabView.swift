@@ -13,14 +13,16 @@ struct CustomTabView: View {
     }
     
     @State private var selected: Tab = .calendar
+    @State private var hideTabBar: Bool = false
     
     var body: some View {
         ZStack {
             
             TabView(selection: $selected) {
                 Group {
-                    NavigationStack {
+                    NavigationView {
                         MainView()
+                        Spacer()
                     }
                     .tag(Tab.calendar)
                     

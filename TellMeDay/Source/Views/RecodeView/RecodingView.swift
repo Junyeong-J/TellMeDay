@@ -10,10 +10,10 @@ import SwiftUI
 struct RecodingView: View {
     
     let selectedDate: Date
-    
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = RecodingViewModel()
     let categories = ["일상생활", "영화", "여행", "기타"]
+    @Binding var firstNaviLinkActive: Bool
     
     var body: some View {
         VStack {
@@ -73,7 +73,7 @@ struct RecodingView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: VoiceDiaryRecordingView()) {
+                NavigationLink(destination: VoiceDiaryRecordingView(firstNaviLinkActive: $firstNaviLinkActive)) {
                     Image(systemName: "arrowshape.right.circle")
                         .resizable()
                         .frame(width: 30, height: 30)

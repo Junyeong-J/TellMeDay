@@ -10,19 +10,20 @@ import UIKit
 import FSCalendar
 
 struct MonthCalendarViewControllerWrapper: UIViewControllerRepresentable {
-    
     @Binding var selectedDate: Date?
-    
-    func makeUIViewController(context: Context) -> some UIViewController {
+    @Binding var firstNaviLinkActive: Bool
+
+    func makeUIViewController(context: Context) -> MonthCalendarViewController {
         let vc = MonthCalendarViewController()
         vc.onDateSelected = { date in
             selectedDate = date
+            firstNaviLinkActive = true // 날짜 선택 시 네비게이션을 활성화합니다.
         }
         return vc
     }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
+
+    func updateUIViewController(_ uiViewController: MonthCalendarViewController, context: Context) {
+        // 필요에 따라 뷰 컨트롤러 업데이트
     }
 }
 

@@ -185,6 +185,21 @@
 			path = DataBase;
 			sourceTree = "<group>";
 		};
+		720789B82CA6F6660053BE8B /* ResultView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ResultView;
+			sourceTree = "<group>";
+		};
+		720789B92CA6F67D0053BE8B /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				72940CA42C9028C800311CE8 /* MainView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
 		72940C962C9028C800311CE8 = {
 			isa = PBXGroup;
 			children = (
@@ -259,8 +274,9 @@
 			isa = PBXGroup;
 			children = (
 				720789972CA4566D0053BE8B /* TabBar */,
-				72940CA42C9028C800311CE8 /* MainView.swift */,
+				720789B92CA6F67D0053BE8B /* MainView */,
 				72940D322CA05DC000311CE8 /* RecodeView */,
+				720789B82CA6F6660053BE8B /* ResultView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
