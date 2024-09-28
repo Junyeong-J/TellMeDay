@@ -17,6 +17,7 @@ final class VoiceDiaryRecordingViewModel: ViewModelType {
     @Published var audioRecorderManager = AudioRecorderManager()
     
     var cancellables = Set<AnyCancellable>()
+    private var isProcessing = false
     
     var input = Input()
     
@@ -83,13 +84,22 @@ extension VoiceDiaryRecordingViewModel {
         
     }
     
+    
+
     private func togglePlayPause() {
+        guard !isProcessing else { return }
+        isProcessing = true
+        
+        defer { isProcessing = false }
+        
         if !output.isPlaying {
-            if !output.isRecording{
+            if !output.isRecording {
                 output.isRecording = true
                 audioRecorderManager.startRecording()
+                print("녹음 시작: \(audioRecorderManager.currentRecordingURL?.path ?? "N/A")")
             } else {
                 audioRecorderManager.resumeRecording()
+                print("녹음 재개")
             }
             output.isPlaying = true
             output.showStopButton = true
@@ -103,6 +113,8 @@ extension VoiceDiaryRecordingViewModel {
             audioRecorderManager.pauseRecording()
         }
     }
+
+
     
     private func handleStop() {
         output.isPlaying = false

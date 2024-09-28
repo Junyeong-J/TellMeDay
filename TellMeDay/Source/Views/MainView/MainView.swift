@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @Binding var hideTabBar: Bool
     @State var firstNaviLinkActive = false
     @State private var selectedDate: Date? = nil
     
@@ -24,6 +26,9 @@ struct MainView: View {
             .background(Color.appBaseBackground)
             .navigationBarTitle("")
             .navigationBarHidden(true)
+            .onChange(of: firstNaviLinkActive) { newValue in
+                hideTabBar = newValue
+            }
         }
         .edgesIgnoringSafeArea(.all)
         .overlay(
@@ -36,14 +41,14 @@ struct MainView: View {
     @ViewBuilder
     func destinationView() -> some View {
         if let date = selectedDate {
-            RecodingView(selectedDate: date, firstNaviLinkActive: $firstNaviLinkActive)
+            RecodingView(selectedDate: date, firstNaviLinkActive: $firstNaviLinkActive, hideTabBar: $hideTabBar)
         } else {
-            EmptyView() // 선택된 날짜가 없을 경우 빈 화면
+            EmptyView()
         }
     }
 }
 
 
-#Preview {
-    MainView()
-}
+//#Preview {
+//    MainView()
+//}

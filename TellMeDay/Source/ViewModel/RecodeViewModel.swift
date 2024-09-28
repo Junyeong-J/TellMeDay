@@ -32,6 +32,7 @@ final class RecodingViewModel: ViewModelType {
                 self?.toggleSkipTitle()
             }
             .store(in: &cancellables)
+        
     }
     
 }
@@ -51,13 +52,19 @@ extension RecodingViewModel {
         var customCategoryVisible: Bool = false
         var isSkipTitle: Bool = false
         var title: String = ""
+        var isActionButtonEnabled: Bool = false
     }
     
     func transform() {
         output.selectedDate = FormatterManager.shared.recodingDateHeader(input.selectedDate)
-        output.selectedCategory = input.selectedCategory
+        if input.selectedCategory == "기타" && !input.customCategory.isEmpty {
+            output.selectedCategory = input.customCategory
+        } else {
+            output.selectedCategory = input.selectedCategory
+        }
         output.customCategoryVisible = input.selectedCategory == "기타"
         output.title = output.isSkipTitle ? "제목 없음" : output.title
+        output.isActionButtonEnabled = !output.title.isEmpty && output.selectedCategory != "카테고리 선택"
     }
     
     func updateCategory(_ category: String) {
@@ -75,7 +82,8 @@ extension RecodingViewModel {
     
     private func toggleSkipTitle() {
         output.isSkipTitle.toggle()
-        output.title = output.isSkipTitle ? "제목 없음" : output.title
+        output.title = output.isSkipTitle ? "제목 없음" : ""
+        transform()
     }
     
 }
