@@ -21,22 +21,23 @@ struct CustomTabView: View {
             TabView(selection: $selected) {
                 Group {
                     NavigationView {
-                        MainView()
+                        MainView(hideTabBar: $hideTabBar)
+                            .onAppear { hideTabBar = false }
                         Spacer()
                     }
                     .tag(Tab.calendar)
                     
-                    NavigationStack {
-                        SettingsView()
+                    NavigationView {
+                        TreeChartView()
                     }
                     .tag(Tab.chart)
                     
-                    NavigationStack {
+                    NavigationView {
                         SettingsView()
                     }
                     .tag(Tab.myRecode)
                     
-                    NavigationStack {
+                    NavigationView {
                         SettingsView()
                     }
                     .tag(Tab.settings)
@@ -44,15 +45,18 @@ struct CustomTabView: View {
                 .toolbar(.hidden, for: .tabBar)
             }
             
-            VStack {
-                Spacer()
-                tabBar
+            if !hideTabBar {
+                VStack {
+                    Spacer()
+                    tabBar
+                }
+                .ignoresSafeArea(edges: .bottom)
             }
-            .ignoresSafeArea(edges: .bottom)
         }
     }
     
     var tabBar: some View {
+        
         HStack {
             tabButton(for: .calendar, iconName: .calendar)
             Spacer()
@@ -71,7 +75,6 @@ struct CustomTabView: View {
                 .shadow(color: .black.opacity(0.2), radius: 8, y: 2)
                 .edgesIgnoringSafeArea(.all)
         }
-        
         .overlay(
             CircleButtonView()
                 .offset(y: -50)
@@ -82,6 +85,7 @@ struct CustomTabView: View {
     private func tabButton(for tab: Tab, iconName: IconImageName) -> some View {
         Button {
             selected = tab
+            hideTabBar = false
         } label: {
             Image(systemName: iconName.rawValue)
                 .tabIconView(isSelected: selected == tab, systemName: iconName.rawValue)
