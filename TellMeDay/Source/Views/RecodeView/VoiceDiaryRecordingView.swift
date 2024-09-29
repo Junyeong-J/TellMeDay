@@ -22,6 +22,7 @@ struct VoiceDiaryRecordingView: View {
     let selectedDate: Date
     let title: String
     let category: String
+    private let repository = ListTableRepository()
     
     var body: some View {
         GeometryReader { geometry in
@@ -129,6 +130,10 @@ struct VoiceDiaryRecordingView: View {
                                         self.sentimentData = sentimentData
                                         self.emotion = emotion
                                         showAnalysisResult = true
+                                        
+                                        let positiveScore = sentimentData.first(where: { $0.emotion == "긍정" })?.percentage ?? 0
+                                        let negativeScore = sentimentData.first(where: { $0.emotion == "부정" })?.percentage ?? 0
+                                        viewModel.saveDiaryEntry(category: category, title: title, positiveScore: positiveScore, negativeScore: negativeScore, emotion: emotion)
                                     } else {
                                         // 오류 처리
                                     }
@@ -149,6 +154,7 @@ struct VoiceDiaryRecordingView: View {
             .onAppear {
                 viewModel.input.selectedDate = selectedDate
                 print("Title: \(title), Category: \(category)")
+                repository.detectRealmURL()
             }
         }
     }
