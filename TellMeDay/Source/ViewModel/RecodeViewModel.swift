@@ -32,7 +32,6 @@ final class RecodingViewModel: ViewModelType {
                 self?.toggleSkipTitle()
             }
             .store(in: &cancellables)
-        
     }
     
 }

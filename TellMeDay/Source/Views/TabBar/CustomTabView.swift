@@ -14,6 +14,8 @@ struct CustomTabView: View {
     
     @State private var selected: Tab = .calendar
     @State private var hideTabBar: Bool = false
+    private let repository = ListTableRepository()
+    @State var firstNaviLinkActive = false
     
     var body: some View {
         ZStack {
@@ -28,12 +30,14 @@ struct CustomTabView: View {
                     .tag(Tab.calendar)
                     
                     NavigationView {
-                        TreeChartView()
+                        AnalyzeView()
+                        Spacer()
                     }
                     .tag(Tab.chart)
                     
                     NavigationView {
-                        SettingsView()
+                        MyDiaryView()
+                        Spacer()
                     }
                     .tag(Tab.myRecode)
                     
@@ -58,27 +62,26 @@ struct CustomTabView: View {
     var tabBar: some View {
         
         HStack {
+            Spacer()
             tabButton(for: .calendar, iconName: .calendar)
             Spacer()
             tabButton(for: .chart, iconName: .chart)
             Spacer()
-            Spacer()
+//            Spacer()
             tabButton(for: .myRecode, iconName: .myRecode)
             Spacer()
-            tabButton(for: .settings, iconName: .settings)
+//            Spacer()
+//            tabButton(for: .settings, iconName: .settings)
         }
         .padding(.horizontal)
         .frame(height: 100)
         .background {
-            CustomTabBarShape()
+            Rectangle()
                 .fill(.appTabBar)
                 .shadow(color: .black.opacity(0.2), radius: 8, y: 2)
                 .edgesIgnoringSafeArea(.all)
         }
-        .overlay(
-            CircleButtonView()
-                .offset(y: -50)
-        )
+
     }
     
     @ViewBuilder

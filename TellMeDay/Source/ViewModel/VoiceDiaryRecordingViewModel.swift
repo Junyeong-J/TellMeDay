@@ -18,6 +18,7 @@ final class VoiceDiaryRecordingViewModel: ViewModelType {
     
     var cancellables = Set<AnyCancellable>()
     private var isProcessing = false
+    private let repository = ListTableRepository()
     
     var input = Input()
     
@@ -204,6 +205,32 @@ extension VoiceDiaryRecordingViewModel {
         let seconds = time % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
+    
+    func saveDiaryEntry(category: String, title: String, positiveScore: Double, negativeScore: Double, emotion: String) {
+        
+        let folder: DiaryFolder
+        if let existingFolder = repository.fetchFolder().first(where: { $0.category == category }) {
+            folder = existingFolder
+        } else {
+            folder = repository.saveFolder(category: category)
+        }
+        
+        // 녹음된 파일의 경로에서 파일 이름만 추출하여 저장
+        let audioFileName = audioRecorderManager.currentRecordingURL?.lastPathComponent
+        
+        repository.saveEntry(
+            to: folder,
+            title: title,
+            content: output.transcript,
+            selectedDate: input.selectedDate,
+            audioFilePath: audioFileName, // 파일 이름만 저장
+            positiveScore: Int(positiveScore),
+            negativeScore: Int(negativeScore),
+            emotion: emotion
+        )
+    }
+
+    
     
 }
 

@@ -11,10 +11,15 @@ final class CalendarViewModel {
     
     var currentSelectedDate: Date? = nil
     var previousSelectedDate: Date? = nil
+    private let repository = ListTableRepository()
     
     func fetchArtwork(_ date: Date, completion: @escaping (UIImage?) -> Void) {
-        let imageURL = UIImage(systemName: "star")?.withTintColor(.appMain, renderingMode: .alwaysOriginal)
-        completion(imageURL)
+        if let entry = repository.fetchEntry(for: date) {
+            let emotionImage = EmotionImageManager.emojiName(for: entry.emotion ?? "")
+            completion(UIImage(named: emotionImage))
+        } else {
+            completion(nil)
+        }
     }
     
     func isCurrentSelected(_ date: Date) -> Bool {
@@ -24,5 +29,9 @@ final class CalendarViewModel {
     func updateSelectedDate(_ date: Date) {
         previousSelectedDate = currentSelectedDate
         currentSelectedDate = date
+    }
+    
+    func isRecordedDate(_ date: Date) -> Bool {
+        return repository.fetchEntryTo(for: date) != nil
     }
 }

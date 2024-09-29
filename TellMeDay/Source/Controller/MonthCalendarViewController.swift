@@ -12,18 +12,18 @@ import FSCalendar
 struct MonthCalendarViewControllerWrapper: UIViewControllerRepresentable {
     @Binding var selectedDate: Date?
     @Binding var firstNaviLinkActive: Bool
-
+    
     func makeUIViewController(context: Context) -> MonthCalendarViewController {
         let vc = MonthCalendarViewController()
         vc.onDateSelected = { date in
             selectedDate = date
-            firstNaviLinkActive = true // 날짜 선택 시 네비게이션을 활성화합니다.
+            firstNaviLinkActive = true
         }
         return vc
     }
-
+    
     func updateUIViewController(_ uiViewController: MonthCalendarViewController, context: Context) {
-        // 필요에 따라 뷰 컨트롤러 업데이트
+        uiViewController.rootView.calendar.reloadData()
     }
 }
 
@@ -32,14 +32,18 @@ final class MonthCalendarViewController: BaseViewController<MonthCalendarView> {
     private var viewModel = CalendarViewModel()
     private var currentPageDate: Date?
     var onDateSelected: ((Date) -> Void)?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         settingCalendar()
         setupMonthView()
         rootView.calendar.reloadData()
     }
-
+    
+    @objc private func reloadCalendar() {
+        rootView.calendar.reloadData()
+    }
+    
     private func setupMonthView() {
         if let selectedDate = rootView.calendar.selectedDate {
             currentPageDate = selectedDate
@@ -62,17 +66,25 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
         guard let cell = calendar.dequeueReusableCell(withIdentifier: CalendarCell.description(), for: date, at: position) as? CalendarCell else {
             return FSCalendarCell()
         }
-
+        
         guard position == .current else {
             cell.backImageView.image = nil
             cell.backImageView.alpha = 0
             return cell
         }
         
-        viewModel.fetchArtwork(date) { url in
-            if let url = url {
-                cell.backImageView.image = url
+        let isRecordedDate = viewModel.isRecordedDate(date)
+        
+        if isRecordedDate {
+            viewModel.fetchArtwork(date) { image in
+                DispatchQueue.main.async {
+                    cell.backImageView.image = image
+                    cell.backImageView.alpha = 1
+                }
             }
+        } else {
+            cell.backImageView.image = nil
+            cell.backImageView.alpha = 0
         }
         
         cell.backImageView.alpha = viewModel.isCurrentSelected(date) ? 1 : 0.5
@@ -82,6 +94,12 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         guard monthPosition == .current else {
             return
+        }
+        
+        if viewModel.isRecordedDate(date) {
+            onDateSelected?(date)
+        } else {
+            calendar.deselect(date)
         }
         
         viewModel.updateSelectedDate(date)

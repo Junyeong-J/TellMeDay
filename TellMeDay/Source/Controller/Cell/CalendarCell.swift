@@ -15,15 +15,17 @@ class CalendarCell: FSCalendarCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
+        view.layer.zPosition = 2
         return view
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.titleLabel.snp.makeConstraints { make in
-            make.center.equalTo(contentView)
-        }
+        titleLabel.layer.zPosition = 1
+                titleLabel.snp.makeConstraints { make in
+                    make.center.equalTo(contentView)
+                }
         
         contentView.insertSubview(backImageView, at: 0)
         backImageView.snp.makeConstraints { make in

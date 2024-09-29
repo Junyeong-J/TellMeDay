@@ -23,6 +23,8 @@
 		720789BB2CA6FF310053BE8B /* AnalysisResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789BA2CA6FF310053BE8B /* AnalysisResultView.swift */; };
 		720789BE2CA705380053BE8B /* AnalyzeSentimentNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789BD2CA705380053BE8B /* AnalyzeSentimentNetwork.swift */; };
 		720789C02CA70B4B0053BE8B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 720789BF2CA70B4B0053BE8B /* .gitignore */; };
+		720789C22CA70BC70053BE8B /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789C12CA70BC70053BE8B /* APIKey.swift */; };
+		720789C42CA722790053BE8B /* EmotionImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789C32CA722790053BE8B /* EmotionImageManager.swift */; };
 		72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA22C9028C800311CE8 /* TellMeDayApp.swift */; };
 		72940CA52C9028C800311CE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA42C9028C800311CE8 /* MainView.swift */; };
 		72940CA72C9028C900311CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72940CA62C9028C900311CE8 /* Assets.xcassets */; };
@@ -45,6 +47,13 @@
 		72940D572CA3059000311CE8 /* VoiceDiaryRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D562CA3059000311CE8 /* VoiceDiaryRecordingView.swift */; };
 		72940D592CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D582CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift */; };
 		72940D5C2CA30B6100311CE8 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940D5B2CA30B6100311CE8 /* DateHeaderView.swift */; };
+		72A3AA3A2CA84CAE005FBCDD /* DiaryTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA392CA84CAE005FBCDD /* DiaryTableRepository.swift */; };
+		72A3AA3D2CA86342005FBCDD /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA3C2CA86342005FBCDD /* DiaryDetailView.swift */; };
+		72A3AA402CA93F15005FBCDD /* EditDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA3F2CA93F15005FBCDD /* EditDiary.swift */; };
+		72A3AA422CA942AA005FBCDD /* EditDiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA412CA942AA005FBCDD /* EditDiaryViewModel.swift */; };
+		72A3AA452CA97653005FBCDD /* MyDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA442CA97653005FBCDD /* MyDiaryView.swift */; };
+		72A3AA472CA98056005FBCDD /* DiaryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA462CA98056005FBCDD /* DiaryCardView.swift */; };
+		72A3AA492CA99587005FBCDD /* AnalyzeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA482CA99587005FBCDD /* AnalyzeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +87,8 @@
 		720789BA2CA6FF310053BE8B /* AnalysisResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisResultView.swift; sourceTree = "<group>"; };
 		720789BD2CA705380053BE8B /* AnalyzeSentimentNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeSentimentNetwork.swift; sourceTree = "<group>"; };
 		720789BF2CA70B4B0053BE8B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		720789C12CA70BC70053BE8B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		720789C32CA722790053BE8B /* EmotionImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionImageManager.swift; sourceTree = "<group>"; };
 		72940C9F2C9028C800311CE8 /* TellMeDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72940CA22C9028C800311CE8 /* TellMeDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeDayApp.swift; sourceTree = "<group>"; };
 		72940CA42C9028C800311CE8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -97,6 +108,13 @@
 		72940D562CA3059000311CE8 /* VoiceDiaryRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDiaryRecordingView.swift; sourceTree = "<group>"; };
 		72940D582CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDiaryRecordingViewModel.swift; sourceTree = "<group>"; };
 		72940D5B2CA30B6100311CE8 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
+		72A3AA392CA84CAE005FBCDD /* DiaryTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableRepository.swift; sourceTree = "<group>"; };
+		72A3AA3C2CA86342005FBCDD /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
+		72A3AA3F2CA93F15005FBCDD /* EditDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiary.swift; sourceTree = "<group>"; };
+		72A3AA412CA942AA005FBCDD /* EditDiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryViewModel.swift; sourceTree = "<group>"; };
+		72A3AA442CA97653005FBCDD /* MyDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiaryView.swift; sourceTree = "<group>"; };
+		72A3AA462CA98056005FBCDD /* DiaryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCardView.swift; sourceTree = "<group>"; };
+		72A3AA482CA99587005FBCDD /* AnalyzeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +138,7 @@
 				720789872CA41F980053BE8B /* FormatterManager.swift */,
 				72940D352CA064DE00311CE8 /* SpeechRecognizer.swift */,
 				720789AB2CA5A6F20053BE8B /* AudioRecorderManager.swift */,
+				720789C32CA722790053BE8B /* EmotionImageManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -187,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				720789A72CA5565A0053BE8B /* RealmModel.swift */,
+				72A3AA392CA84CAE005FBCDD /* DiaryTableRepository.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -239,6 +259,7 @@
 				72940D082C982D7900311CE8 /* Source */,
 				72940D092C982D7E00311CE8 /* Resource */,
 				72940CA82C9028C900311CE8 /* Preview Content */,
+				720789C12CA70BC70053BE8B /* APIKey.swift */,
 			);
 			path = TellMeDay;
 			sourceTree = "<group>";
@@ -254,8 +275,8 @@
 		72940D082C982D7900311CE8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				720789BC2CA7051F0053BE8B /* Network */,
 				72940D0A2C982DA400311CE8 /* App */,
+				720789BC2CA7051F0053BE8B /* Network */,
 				720789A62CA556250053BE8B /* DataBase */,
 				720789932CA4548A0053BE8B /* Constants */,
 				720789892CA422A50053BE8B /* Base */,
@@ -290,7 +311,11 @@
 		72940D0B2C982DB300311CE8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				72A3AA4A2CA9958C005FBCDD /* AnalyzeView */,
 				720789972CA4566D0053BE8B /* TabBar */,
+				72A3AA432CA9760E005FBCDD /* MyDiaryView */,
+				72A3AA3E2CA93F00005FBCDD /* EditDiaryView */,
+				72A3AA3B2CA8631F005FBCDD /* DetailRecodingView */,
 				720789B92CA6F67D0053BE8B /* MainView */,
 				72940D322CA05DC000311CE8 /* RecodeView */,
 				720789B82CA6F6660053BE8B /* ResultView */,
@@ -322,6 +347,7 @@
 				72940D192C98432700311CE8 /* CalendarViewModel.swift */,
 				7207899A2CA478310053BE8B /* RecodeViewModel.swift */,
 				72940D582CA305BB00311CE8 /* VoiceDiaryRecordingViewModel.swift */,
+				72A3AA412CA942AA005FBCDD /* EditDiaryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -369,6 +395,39 @@
 				720789902CA452450053BE8B /* TabView */,
 			);
 			path = CustomModifier;
+			sourceTree = "<group>";
+		};
+		72A3AA3B2CA8631F005FBCDD /* DetailRecodingView */ = {
+			isa = PBXGroup;
+			children = (
+				72A3AA3C2CA86342005FBCDD /* DiaryDetailView.swift */,
+			);
+			path = DetailRecodingView;
+			sourceTree = "<group>";
+		};
+		72A3AA3E2CA93F00005FBCDD /* EditDiaryView */ = {
+			isa = PBXGroup;
+			children = (
+				72A3AA3F2CA93F15005FBCDD /* EditDiary.swift */,
+			);
+			path = EditDiaryView;
+			sourceTree = "<group>";
+		};
+		72A3AA432CA9760E005FBCDD /* MyDiaryView */ = {
+			isa = PBXGroup;
+			children = (
+				72A3AA442CA97653005FBCDD /* MyDiaryView.swift */,
+				72A3AA462CA98056005FBCDD /* DiaryCardView.swift */,
+			);
+			path = MyDiaryView;
+			sourceTree = "<group>";
+		};
+		72A3AA4A2CA9958C005FBCDD /* AnalyzeView */ = {
+			isa = PBXGroup;
+			children = (
+				72A3AA482CA99587005FBCDD /* AnalyzeView.swift */,
+			);
+			path = AnalyzeView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,10 +515,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72A3AA472CA98056005FBCDD /* DiaryCardView.swift in Sources */,
+				72A3AA402CA93F15005FBCDD /* EditDiary.swift in Sources */,
 				72940D112C98373900311CE8 /* MonthCalendarViewController.swift in Sources */,
 				720789A82CA5565A0053BE8B /* RealmModel.swift in Sources */,
 				720789A12CA479C80053BE8B /* DateRecodingView.swift in Sources */,
 				72940D2B2C9EAA0D00311CE8 /* ForegroundWrapper.swift in Sources */,
+				72A3AA452CA97653005FBCDD /* MyDiaryView.swift in Sources */,
+				72A3AA3A2CA84CAE005FBCDD /* DiaryTableRepository.swift in Sources */,
+				720789C22CA70BC70053BE8B /* APIKey.swift in Sources */,
 				720789922CA4525F0053BE8B /* TabIconView.swift in Sources */,
 				72940D342CA05DEF00311CE8 /* TitleTextField.swift in Sources */,
 				7207898D2CA422C10053BE8B /* BaseViewController.swift in Sources */,
@@ -468,6 +532,7 @@
 				72940CA52C9028C800311CE8 /* MainView.swift in Sources */,
 				720789882CA41F980053BE8B /* FormatterManager.swift in Sources */,
 				72940D572CA3059000311CE8 /* VoiceDiaryRecordingView.swift in Sources */,
+				720789C42CA722790053BE8B /* EmotionImageManager.swift in Sources */,
 				72940D552CA1C6B300311CE8 /* ViewModelType.swift in Sources */,
 				720789BB2CA6FF310053BE8B /* AnalysisResultView.swift in Sources */,
 				7207898F2CA4230E0053BE8B /* MonthCalendarView.swift in Sources */,
@@ -477,13 +542,16 @@
 				7207899B2CA478310053BE8B /* RecodeViewModel.swift in Sources */,
 				72940D312C9FEBE300311CE8 /* ResourceFonts.swift in Sources */,
 				72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */,
+				72A3AA492CA99587005FBCDD /* AnalyzeView.swift in Sources */,
 				720789BE2CA705380053BE8B /* AnalyzeSentimentNetwork.swift in Sources */,
 				72940D172C98424800311CE8 /* CalendarCell.swift in Sources */,
+				72A3AA3D2CA86342005FBCDD /* DiaryDetailView.swift in Sources */,
 				720789992CA456890053BE8B /* CircleButtonView.swift in Sources */,
 				72940D1A2C98432700311CE8 /* CalendarViewModel.swift in Sources */,
 				7207898B2CA422AC0053BE8B /* BaseView.swift in Sources */,
 				720789962CA454B10053BE8B /* IconImageName.swift in Sources */,
 				72940D5C2CA30B6100311CE8 /* DateHeaderView.swift in Sources */,
+				72A3AA422CA942AA005FBCDD /* EditDiaryViewModel.swift in Sources */,
 				72940D262C9D457500311CE8 /* CustomTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
