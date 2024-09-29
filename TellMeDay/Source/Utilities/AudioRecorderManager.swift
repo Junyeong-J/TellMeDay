@@ -31,7 +31,7 @@ class AudioRecorderManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
         currentRecordingURL = fileURL
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 8000,
+            AVSampleRateKey: 12000,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
@@ -81,6 +81,20 @@ class AudioRecorderManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
 
 extension AudioRecorderManager {
     
+    func startPlaying(with fileName: String) {
+        let url = getDocumentsDirectory().appendingPathComponent(fileName)
+        
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            print("File does not exist at path: \(url.path)")
+            return
+        }
+        
+        currentRecordingURL = url
+        startPlaying()
+    }
+    
+    
+    
     func startPlaying() {
         guard let recordingURL = currentRecordingURL else {
             print("재생할 녹음 파일이 없습니다.")
@@ -119,5 +133,34 @@ extension AudioRecorderManager {
         self.isPaused = false
     }
     
+    func loadAudioFile(with filePath: String) {
+        let url = getDocumentsDirectory().appendingPathComponent(filePath)
+        
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            print("File does not exist at path: \(url.path)")
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.delegate = self
+        } catch {
+            print("오디오 파일 로드 중 오류 발생: \(error.localizedDescription)")
+        }
+    }
     
+}
+
+extension AVAudioPlayer {
+    var currentTimeString: String {
+        let minutes = Int(currentTime) / 60
+        let seconds = Int(currentTime) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    var durationString: String {
+        let minutes = Int(duration) / 60
+        let seconds = Int(duration) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
 }
