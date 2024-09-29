@@ -1,18 +1,18 @@
 //
-//  TestView.swift
+//  DiaryDetailView.swift
 //  TellMeDay
 //
-//  Created by 전준영 on 9/28/24.
+//  Created by 전준영 on 9/29/24.
 //
 
 import SwiftUI
 
-struct TestView: View {
+struct DiaryDetailView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    TestView()
+    DiaryDetailView()
 }
