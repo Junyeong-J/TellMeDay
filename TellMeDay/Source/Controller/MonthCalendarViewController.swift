@@ -50,7 +50,7 @@ final class MonthCalendarViewController: BaseViewController<MonthCalendarView> {
         } else {
             currentPageDate = Date()
         }
-        rootView.headerLabel.text = FormatterManager.shared.mainViewDateHeader().string(from: currentPageDate ?? Date())
+        rootView.headerLabel.text = FormatterManager.shared.mainDateHeader().string(from: currentPageDate ?? Date())
     }
     
     private func settingCalendar() {
@@ -119,7 +119,7 @@ extension MonthCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         currentPageDate = calendar.currentPage
-        rootView.headerLabel.text = FormatterManager.shared.mainViewDateHeader().string(from: currentPageDate ?? Date())
+        rootView.headerLabel.text = FormatterManager.shared.mainDateHeader().string(from: currentPageDate ?? Date())
         calendar.reloadData()
     }
     

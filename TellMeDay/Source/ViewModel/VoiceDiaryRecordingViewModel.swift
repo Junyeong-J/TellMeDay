@@ -54,6 +54,7 @@ extension VoiceDiaryRecordingViewModel {
         var listenButton: Bool = false
         var timerText: String = "00:00"
         var transcript: String = ""
+        var isStop: Bool = false
     }
     
     func transform() {
@@ -194,10 +195,19 @@ extension VoiceDiaryRecordingViewModel {
                 self.output.timerText = self.formattedTime(self.elapsedTime)
                 
                 if self.elapsedTime >= 180 {
-                    self.stopTimer()
-                    self.input.listenButtonTapped.send(())
+//                    self.stopTimer()
+//                    self.input.listenButtonTapped.send(())
+                    self.stopRecordingAfterTimeout()
+                    output.isStop = true
                 }
             }
+    }
+    
+    private func stopRecordingAfterTimeout() {
+        stopTimer()
+        speechRecognizer.stopTranscribing()
+        audioRecorderManager.stopRecording()
+        output.isPlaying = false
     }
     
     private func formattedTime(_ time: Int) -> String {
@@ -215,7 +225,6 @@ extension VoiceDiaryRecordingViewModel {
             folder = repository.saveFolder(category: category)
         }
         
-        // 녹음된 파일의 경로에서 파일 이름만 추출하여 저장
         let audioFileName = audioRecorderManager.currentRecordingURL?.lastPathComponent
         
         repository.saveEntry(
@@ -223,7 +232,7 @@ extension VoiceDiaryRecordingViewModel {
             title: title,
             content: output.transcript,
             selectedDate: input.selectedDate,
-            audioFilePath: audioFileName, // 파일 이름만 저장
+            audioFilePath: audioFileName,
             positiveScore: Int(positiveScore),
             negativeScore: Int(negativeScore),
             emotion: emotion

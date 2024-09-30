@@ -89,7 +89,7 @@ extension ListTableRepository {
     
     func fetchEntries(for year: Int, month: Int) -> [DiaryEntry] {
         let calendar = Calendar.current
-        
+
         var startComponents = DateComponents(year: year, month: month, day: 1)
         let startDate = calendar.date(from: startComponents)!
         
@@ -98,6 +98,7 @@ extension ListTableRepository {
         
         let entries = realm.objects(DiaryEntry.self)
             .filter("selectedDate >= %@ AND selectedDate < %@", startDate, endDate)
+            .sorted(byKeyPath: "selectedDate", ascending: false)
         
         return Array(entries)
     }

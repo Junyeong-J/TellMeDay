@@ -21,6 +21,12 @@ final class FormatterManager {
         return formatter
     }
     
+    func mainDateHeader() -> DateFormatter {
+        formatter.dateFormat = "yyyy년 MM월"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter
+    }
+    
     func mainViewDateHeader() -> DateFormatter {
         formatter.dateFormat = "yyyy.MM.dd"
         formatter.locale = Locale(identifier: "ko_KR")

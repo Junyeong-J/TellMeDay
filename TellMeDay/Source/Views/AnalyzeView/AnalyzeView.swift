@@ -52,13 +52,30 @@ struct AnalyzeView: View {
             
             ZStack {
                 Path { path in
+
+                    path.move(to: CGPoint(x: 115, y: 250))
+                    path.addLine(to: CGPoint(x: 115, y: 100))
                     path.move(to: CGPoint(x: 125, y: 250))
-                    path.addLine(to: CGPoint(x: 125, y: 50))
-                    path.addLine(to: CGPoint(x: 80, y: 100))
-                    path.move(to: CGPoint(x: 125, y: 50))
-                    path.addLine(to: CGPoint(x: 170, y: 100))
+                    path.addLine(to: CGPoint(x: 125, y: 100))
+                    path.move(to: CGPoint(x: 135, y: 250))
+                    path.addLine(to: CGPoint(x: 135, y: 100))
+                    
+                    path.move(to: CGPoint(x: 135, y: 105))
+                    path.addLine(to: CGPoint(x: 210, y: 60))
+                    path.move(to: CGPoint(x: 172, y: 78))
+                    path.addLine(to: CGPoint(x: 210, y: 110))
+                    
+                    path.move(to: CGPoint(x: 40, y: 60))
+                    path.addLine(to: CGPoint(x: 120, y: 110))
+                    path.move(to: CGPoint(x: 70, y: 75))
+                    path.addLine(to: CGPoint(x: 40, y: 110))
+                    
+                    path.move(to: CGPoint(x: 135, y: 20))
+                    path.addLine(to: CGPoint(x: 125, y: 100))
+                    path.move(to: CGPoint(x: 135, y: 40))
+                    path.addLine(to: CGPoint(x: 80, y: 30))
                 }
-                .stroke(Color.brown, lineWidth: 8)
+                .stroke(Color.brown, lineWidth: 10)
                 
                 ZStack {
                     ForEach(0..<totalLeafCount(), id: \.self) { index in
