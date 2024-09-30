@@ -42,7 +42,7 @@ struct MainView: View {
     @ViewBuilder
     func destinationView() -> some View {
         if let date = selectedDate, let entry = repository.fetchEntryTo(for: date) {
-            DiaryDetailView(entry: entry, firstNaviLinkActive: $firstNaviLinkActive)
+            DiaryDetailView(entry: entry, firstNaviLinkActive: $firstNaviLinkActive, hideDiaryTabBar: .constant(false))
         } else if let date = selectedDate {
             RecodingView(selectedDate: date, firstNaviLinkActive: $firstNaviLinkActive, hideTabBar: $hideTabBar)
         } else {

@@ -11,6 +11,7 @@ struct DiaryDetailView: View {
     
     @State var entry: DiaryEntry
     @Binding var firstNaviLinkActive: Bool
+    @Binding var hideDiaryTabBar: Bool
     @StateObject private var audioRecorderManager = AudioRecorderManager()
     @State private var playbackProgress: Double = 0
     @State private var isPlaying: Bool = false
@@ -18,7 +19,8 @@ struct DiaryDetailView: View {
     @State private var totalDuration: String = "00:00"
     @Environment(\.dismiss) var dismiss
     var repository = ListTableRepository()
-    
+    @State private var isNavigatingToEdit: Bool = false
+    @State private var showAlert = false
     var body: some View {
         VStack {
             Text(entry.title)
@@ -93,7 +95,8 @@ struct DiaryDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-                    firstNaviLinkActive = false
+//                    firstNaviLinkActive = false
+                    dismiss()
                 }) {
                     Image(systemName: "chevron.left")
                         .asForeground(.appBlackAndWhite)
@@ -101,7 +104,11 @@ struct DiaryDetailView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack {
-                    NavigationLink(destination: EditDiary(entry: $entry)) {
+                    NavigationLink(
+                        destination: EditDiary(entry: $entry)
+                            .onAppear { isNavigatingToEdit = true }
+                            .onDisappear { isNavigatingToEdit = false }
+                    ) {
                         Image(systemName: "pencil.circle")
                             .resizable()
                             .frame(width: 30, height: 30)
@@ -109,12 +116,22 @@ struct DiaryDetailView: View {
                     }
                     
                     Button(action: {
-                        deleteEntry()
+                        showAlert = true
                     }) {
                         Image(systemName: "trash.circle")
                             .resizable()
                             .frame(width: 30, height: 30)
                             .asForeground(.appBlackAndWhite)
+                    }
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("일기를 삭제하시겠습니까?"),
+                            message: Text("삭제된 일기는 복구할 수 없습니다."),
+                            primaryButton: .destructive(Text("삭제")) {
+                                deleteEntry()
+                            },
+                            secondaryButton: .cancel(Text("취소"))
+                        )
                     }
                 }
             }
@@ -139,6 +156,12 @@ struct DiaryDetailView: View {
             reloadData()
         }
         .onDisappear {
+            stopPlayback()
+        }
+        .onDisappear {
+            if !isNavigatingToEdit {
+                hideDiaryTabBar = false
+            }
             stopPlayback()
         }
     }

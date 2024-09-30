@@ -42,8 +42,4 @@ struct DiaryCardView: View {
 }
 
 
-struct MyDiaryView_Preview: PreviewProvider {
-    static var previews: some View {
-        MyDiaryView()
-    }
-}
+

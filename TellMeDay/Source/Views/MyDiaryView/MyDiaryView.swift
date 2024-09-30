@@ -11,6 +11,8 @@ struct MyDiaryView: View {
     
     @State private var currentDate = Date()
     @State private var diaryEntries: [DiaryEntry] = []
+    @State var firstNaviLinkActive = false
+    @Binding var hideDiaryTabBar: Bool
     var repository = ListTableRepository()
     
     var body: some View {
@@ -75,7 +77,12 @@ struct MyDiaryView: View {
                                 .multilineTextAlignment(.center)
                         } else {
                             ForEach(diaryEntries, id: \.id) { entry in
-                                DiaryCardView(entry: entry)
+                                NavigationLink(
+                                    destination: DiaryDetailView(entry: entry, firstNaviLinkActive: $firstNaviLinkActive, hideDiaryTabBar: $hideDiaryTabBar)
+                                        .onAppear { hideDiaryTabBar = true }
+                                ) {
+                                    DiaryCardView(entry: entry)
+                                }
                             }
                         }
                     }
@@ -86,6 +93,9 @@ struct MyDiaryView: View {
             .background(Color(.appBaseBackground))
             .onAppear {
                 loadEntries(for: currentDate)
+            }
+            .onChange(of: firstNaviLinkActive) { newValue in
+                hideDiaryTabBar = newValue
             }
         }
     }
@@ -106,8 +116,3 @@ struct MyDiaryView: View {
     }
 }
 
-struct MyDiaryView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyDiaryView()
-    }
-}
