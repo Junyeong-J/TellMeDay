@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct VoiceDiaryRecordingView: View {
     
@@ -18,6 +19,7 @@ struct VoiceDiaryRecordingView: View {
     @State private var sentimentData: [SentimentData] = []
     @State private var emotion: String = ""
     @State private var isAnalyzeButtonEnabled = false
+    @State private var showAlert = false
     
     let selectedDate: Date
     let title: String
@@ -28,7 +30,7 @@ struct VoiceDiaryRecordingView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
-                    dateHeaderView(dateText: viewModel.output.selectedDate)
+                    dateHeaderView(dateText: FormatterManager.shared.recodingDateHeader(selectedDate))
                     
                     VStack(spacing: 10) {
                         
@@ -57,15 +59,22 @@ struct VoiceDiaryRecordingView: View {
                         HStack(spacing: 20) {
                             if viewModel.output.playShow {
                                 Button(action: {
-                                    withAnimation(.easeOut) {
-                                        viewModel.input.playButtonTapped.send(())
+                                    checkMicrophonePermission { granted in
+                                        if granted {
+                                            withAnimation(.easeOut) {
+                                                viewModel.input.playButtonTapped.send(())
+                                            }
+                                        } else {
+                                            showAlert = true
+                                        }
                                     }
                                 }) {
                                     Image(systemName: viewModel.output.isPlaying ? "pause.circle" : "play.circle")
                                         .resizable()
                                         .frame(width: 50, height: 50)
-                                        .asForeground(.appBlackAndWhite)
+                                        .asForeground(!viewModel.output.isStop ? .appBlackAndWhite : .gray)
                                 }
+                                .disabled(viewModel.output.isStop)
                                 .animation(.easeOut, value: viewModel.output.isPlaying)
                             }
                             
@@ -104,12 +113,12 @@ struct VoiceDiaryRecordingView: View {
                     Text("""
                         최대 녹음 시간은 3분입니다.
                         음성 텍스트(STT)는 최대 500자까지 저장되며, 500자가 초과되면 더 이상 텍스트로 변환되지 않습니다.
-                        그러나 녹음은 계속 진행되며, 파일은 자동으로 앱의 'Documents' 폴더에 저장됩니다.
+                        그러나 녹음은 계속 진행되며, 파일은 자동으로 폰 내부에 저장됩니다.
                         """)
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .padding(.horizontal)
-                    .padding(.bottom, 120)
+                    .padding(.bottom, 100)
                 }
                 .background(.appBaseBackground)
                 .navigationBarBackButtonHidden(true)
@@ -156,8 +165,42 @@ struct VoiceDiaryRecordingView: View {
                 print("Title: \(title), Category: \(category)")
                 repository.detectRealmURL()
             }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("마이크 권한 거부됨"),
+                    message: Text("마이크에 대한 엑세스 권한이 거부되었습니다. 권한을 변경하시겠습니까?"),
+                    primaryButton: .default(Text("설정으로 이동"), action: {
+                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(appSettings)
+                        }
+                    }),
+                    secondaryButton: .cancel(Text("취소"))
+                )
+            }
+
         }
     }
+    
+    private func checkMicrophonePermission(completion: @escaping (Bool) -> Void) {
+        let microphoneStatus = AVCaptureDevice.authorizationStatus(for: .audio)
+        
+        switch microphoneStatus {
+        case .authorized:
+            completion(true)
+        case .denied, .restricted:
+            showAlert = true
+            completion(false)
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .audio) { granted in
+                DispatchQueue.main.async {
+                    completion(granted)
+                }
+            }
+        @unknown default:
+            completion(false)
+        }
+    }
+
 }
 
 
