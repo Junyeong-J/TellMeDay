@@ -14,6 +14,7 @@ struct CustomTabView: View {
     
     @State private var selected: Tab = .calendar
     @State private var hideTabBar: Bool = false
+    @State private var hideDiaryTabBar: Bool = false
     private let repository = ListTableRepository()
     @State var firstNaviLinkActive = false
     
@@ -36,20 +37,21 @@ struct CustomTabView: View {
                     .tag(Tab.chart)
                     
                     NavigationView {
-                        MyDiaryView()
+                        MyDiaryView(hideDiaryTabBar: $hideDiaryTabBar)
+                            .onAppear { hideDiaryTabBar = false }
                         Spacer()
                     }
                     .tag(Tab.myRecode)
                     
                     NavigationView {
-                        SettingsView()
+//                        SettingsView()
                     }
                     .tag(Tab.settings)
                 }
                 .toolbar(.hidden, for: .tabBar)
             }
             
-            if !hideTabBar {
+            if !hideTabBar && !hideDiaryTabBar {
                 VStack {
                     Spacer()
                     tabBar
@@ -89,6 +91,7 @@ struct CustomTabView: View {
         Button {
             selected = tab
             hideTabBar = false
+            hideDiaryTabBar = false
         } label: {
             Image(systemName: iconName.rawValue)
                 .tabIconView(isSelected: selected == tab, systemName: iconName.rawValue)
@@ -113,14 +116,6 @@ struct CustomTabBarShape: Shape {
         path.addLine(to: CGPoint(x: rect.width, y: rect.height))
         path.addLine(to: CGPoint(x: 0, y: rect.height))
         return path
-    }
-}
-
-struct SettingsView: View {
-    var body: some View {
-        Text("Settings View")
-            .font(.largeTitle)
-            .padding()
     }
 }
 
