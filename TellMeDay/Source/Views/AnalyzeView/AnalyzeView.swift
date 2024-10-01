@@ -43,85 +43,99 @@ struct AnalyzeView: View {
     var repository = ListTableRepository()
     
     var body: some View {
-        VStack {
-            Text("나무는 당신의 감정으로 채워집니다 - 각각의 잎사귀가 고유한 감정을 담고 있어요.")
-                .font(Font.customFont(name: CustomFont.gyuri, size: 25))
-                .foregroundColor(.appBlackAndWhite)
-                .padding(.top)
-                .padding(.horizontal)
-            
-            ZStack {
-                Path { path in
-
-                    path.move(to: CGPoint(x: 115, y: 250))
-                    path.addLine(to: CGPoint(x: 115, y: 100))
-                    path.move(to: CGPoint(x: 125, y: 250))
-                    path.addLine(to: CGPoint(x: 125, y: 100))
-                    path.move(to: CGPoint(x: 135, y: 250))
-                    path.addLine(to: CGPoint(x: 135, y: 100))
+        GeometryReader { geometry in
+            let contentHeight = calculateContentHeight()
+            let shouldScroll = contentHeight > geometry.size.height
+            ScrollView(shouldScroll ? .vertical : []) {
+                VStack {
+                    Text("나무는 당신의 감정으로 채워집니다 - 각각의 잎사귀가 고유한 감정을 담고 있어요.")
+                        .font(Font.customFont(name: CustomFont.gyuri, size: 25))
+                        .foregroundColor(.appBlackAndWhite)
+                        .padding(.top)
+                        .padding(.horizontal)
                     
-                    path.move(to: CGPoint(x: 135, y: 105))
-                    path.addLine(to: CGPoint(x: 210, y: 60))
-                    path.move(to: CGPoint(x: 172, y: 78))
-                    path.addLine(to: CGPoint(x: 210, y: 110))
+                    ZStack {
+                        Path { path in
+                            path.move(to: CGPoint(x: 115, y: 250))
+                            path.addLine(to: CGPoint(x: 115, y: 100))
+                            path.move(to: CGPoint(x: 125, y: 250))
+                            path.addLine(to: CGPoint(x: 125, y: 100))
+                            path.move(to: CGPoint(x: 135, y: 250))
+                            path.addLine(to: CGPoint(x: 135, y: 100))
+                            
+                            path.move(to: CGPoint(x: 135, y: 105))
+                            path.addLine(to: CGPoint(x: 210, y: 60))
+                            path.move(to: CGPoint(x: 172, y: 78))
+                            path.addLine(to: CGPoint(x: 210, y: 110))
+                            
+                            path.move(to: CGPoint(x: 40, y: 60))
+                            path.addLine(to: CGPoint(x: 120, y: 110))
+                            path.move(to: CGPoint(x: 70, y: 75))
+                            path.addLine(to: CGPoint(x: 40, y: 110))
+                            
+                            path.move(to: CGPoint(x: 135, y: 20))
+                            path.addLine(to: CGPoint(x: 125, y: 100))
+                            path.move(to: CGPoint(x: 135, y: 40))
+                            path.addLine(to: CGPoint(x: 80, y: 30))
+                        }
+                        .stroke(Color.brown, lineWidth: 10)
+                        
+                        ZStack {
+                            ForEach(0..<totalLeafCount(), id: \.self) { index in
+                                LeafShape()
+                                    .fill(colorForLeaf(at: index))
+                                    .frame(width: 30, height: 50)
+                                    .offset(randomOffset(for: index))
+                            }
+                        }
+                    }
+                    .frame(width: 250, height: 250)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.gray.opacity(0.2))
+                    )
+                    .padding(.vertical)
                     
-                    path.move(to: CGPoint(x: 40, y: 60))
-                    path.addLine(to: CGPoint(x: 120, y: 110))
-                    path.move(to: CGPoint(x: 70, y: 75))
-                    path.addLine(to: CGPoint(x: 40, y: 110))
+                    Text("저장소에 넣어둔 기간")
+                        .font(Font.customFont(name: CustomFont.gyuri, size: 24))
+                        .asForeground(.appBlackAndWhite)
                     
-                    path.move(to: CGPoint(x: 135, y: 20))
-                    path.addLine(to: CGPoint(x: 125, y: 100))
-                    path.move(to: CGPoint(x: 135, y: 40))
-                    path.addLine(to: CGPoint(x: 80, y: 30))
-                }
-                .stroke(Color.brown, lineWidth: 10)
-                
-                ZStack {
-                    ForEach(0..<totalLeafCount(), id: \.self) { index in
-                        LeafShape()
-                            .fill(colorForLeaf(at: index))
-                            .frame(width: 30, height: 50)
-                            .offset(randomOffset(for: index))
+                    Text(FormatterManager.shared.updateDateRangeText())
+                        .font(Font.customFont(name: CustomFont.gyuri, size: 24))
+                        .asForeground(.appBlackAndWhite)
+                        .padding(.bottom, 5)
+                    
+                    HStack(spacing: 15) {
+                        CustomBarMark(color: .red, percentage: percentage(for: "분노"), emotionName: "분노", animatePercentage: $animatePercentage)
+                        CustomBarMark(color: .yellow, percentage: percentage(for: "공포"), emotionName: "공포", animatePercentage: $animatePercentage)
+                        CustomBarMark(color: .green, percentage: percentage(for: "기쁨"), emotionName: "기쁨", animatePercentage: $animatePercentage)
+                        CustomBarMark(color: .blue, percentage: percentage(for: "슬픔"), emotionName: "슬픔", animatePercentage: $animatePercentage)
+                    }
+                    .frame(height: 150)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 15)
+                            .fill(Color.gray.opacity(0.3))
+                    )
+                    .onAppear {
+                        animatePercentage = 1.0
+                        updateEmotionCounts()
+                    }
+                    
+                    Spacer()
+                    
+                    if shouldScroll {
+                        Spacer().frame(height: 80)
                     }
                 }
+                .padding()
             }
-            .frame(width: 250, height: 250)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.gray.opacity(0.2))
-            )
-            .padding(.vertical)
-            
-            Text("저장소에 넣어둔 기간")
-                .font(Font.customFont(name: CustomFont.gyuri, size: 24))
-                .asForeground(.appBlackAndWhite)
-            
-            Text(FormatterManager.shared.updateDateRangeText())
-                .font(Font.customFont(name: CustomFont.gyuri, size: 24))
-                .asForeground(.appBlackAndWhite)
-                .padding(.bottom, 5)
-            
-            HStack(spacing: 15) {
-                CustomBarMark(color: .red, percentage: percentage(for: "분노"), emotionName: "분노", animatePercentage: $animatePercentage)
-                CustomBarMark(color: .yellow, percentage: percentage(for: "공포"), emotionName: "공포", animatePercentage: $animatePercentage)
-                CustomBarMark(color: .green, percentage: percentage(for: "기쁨"), emotionName: "기쁨", animatePercentage: $animatePercentage)
-                CustomBarMark(color: .blue, percentage: percentage(for: "슬픔"), emotionName: "슬픔", animatePercentage: $animatePercentage)
-            }
-            .frame(height: 150)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(Color.gray.opacity(0.3))
-            )
-            .onAppear {
-                animatePercentage = 1.0
-                updateEmotionCounts()
-            }
-            Spacer()
+            .background(.appBaseBackground)
         }
-        .padding()
-        .background(.appBaseBackground)
+    }
+
+    func calculateContentHeight() -> CGFloat {
+        return 800
     }
     
     func colorForLeaf(at index: Int) -> Color {

@@ -76,7 +76,7 @@ struct CustomTabView: View {
 //            tabButton(for: .settings, iconName: .settings)
         }
         .padding(.horizontal)
-        .frame(height: 100)
+        .frame(height: 80)
         .background {
             Rectangle()
                 .fill(.appTabBar)
