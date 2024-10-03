@@ -54,6 +54,7 @@
 		72A3AA452CA97653005FBCDD /* MyDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA442CA97653005FBCDD /* MyDiaryView.swift */; };
 		72A3AA472CA98056005FBCDD /* DiaryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA462CA98056005FBCDD /* DiaryCardView.swift */; };
 		72A3AA492CA99587005FBCDD /* AnalyzeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA482CA99587005FBCDD /* AnalyzeView.swift */; };
+		72A3AA4C2CAEB0B0005FBCDD /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A3AA4B2CAEB0B0005FBCDD /* Enum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -115,6 +116,7 @@
 		72A3AA442CA97653005FBCDD /* MyDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiaryView.swift; sourceTree = "<group>"; };
 		72A3AA462CA98056005FBCDD /* DiaryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCardView.swift; sourceTree = "<group>"; };
 		72A3AA482CA99587005FBCDD /* AnalyzeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeView.swift; sourceTree = "<group>"; };
+		72A3AA4B2CAEB0B0005FBCDD /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				720789952CA454B10053BE8B /* IconImageName.swift */,
+				72A3AA4B2CAEB0B0005FBCDD /* Enum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				720789C42CA722790053BE8B /* EmotionImageManager.swift in Sources */,
 				72940D552CA1C6B300311CE8 /* ViewModelType.swift in Sources */,
 				720789BB2CA6FF310053BE8B /* AnalysisResultView.swift in Sources */,
+				72A3AA4C2CAEB0B0005FBCDD /* Enum.swift in Sources */,
 				7207898F2CA4230E0053BE8B /* MonthCalendarView.swift in Sources */,
 				72940D362CA064DE00311CE8 /* SpeechRecognizer.swift in Sources */,
 				7207899D2CA478910053BE8B /* RecodingView.swift in Sources */,
