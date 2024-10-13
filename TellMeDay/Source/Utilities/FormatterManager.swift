@@ -45,12 +45,11 @@ final class FormatterManager {
         return formatter.string(from: date)
     }
     
-    func updateDateRangeText() -> String {
+    func updateDateRangeText(for selectedMonth: Date) -> String {
         let calendar = Calendar.current
         formatter.dateFormat = "yyyy.MM.dd"
         
-        let currentDate = Date()
-        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: selectedMonth))!
         
         var components = DateComponents()
         components.month = 1

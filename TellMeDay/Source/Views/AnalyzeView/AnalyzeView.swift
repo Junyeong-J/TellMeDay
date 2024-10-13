@@ -40,6 +40,7 @@ struct AnalyzeView: View {
     @State private var animatePercentage: Double = 0
     @State private var dateRangeText: String = ""
     @State private var emotionCounts: [String: Int] = ["기쁨": 0, "공포": 0, "분노": 0, "슬픔": 0]
+    @State private var currentMonth: Date = Date()
     var repository = ListTableRepository()
     
     var body: some View {
@@ -100,10 +101,32 @@ struct AnalyzeView: View {
                         .font(Font.customFont(name: CustomFont.gyuri, size: 24))
                         .asForeground(.appBlackAndWhite)
                     
-                    Text(FormatterManager.shared.updateDateRangeText())
-                        .font(Font.customFont(name: CustomFont.gyuri, size: 24))
-                        .asForeground(.appBlackAndWhite)
-                        .padding(.bottom, 5)
+                    HStack {
+                        Button(action: {
+                            changeMonth(by: -1)
+                        }) {
+                            Image(systemName: "chevron.left.circle")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                                .asForeground(.appBlackAndWhite)
+                        }
+                        
+                        Text(FormatterManager.shared.updateDateRangeText(for: currentMonth))
+                            .font(Font.customFont(name: CustomFont.gyuri, size: 24))
+                            .asForeground(.appBlackAndWhite)
+                            .padding(.horizontal)
+                        
+                        Button(action: {
+                            changeMonth(by: 1)
+                        }) {
+                            Image(systemName: "chevron.right.circle")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                                .asForeground(isNextMonthAvailable() ? .appBlackAndWhite : .gray)
+                        }
+                        .disabled(!isNextMonthAvailable())
+                    }
+                    .padding(.bottom, 5)
                     
                     HStack(spacing: 15) {
                         CustomBarMark(color: .red, percentage: percentage(for: "분노"), emotionName: "분노", animatePercentage: $animatePercentage)
@@ -133,7 +156,22 @@ struct AnalyzeView: View {
             .background(.appBaseBackground)
         }
     }
-
+    
+    func isNextMonthAvailable() -> Bool {
+        let currentCalendar = Calendar.current
+        let now = Date()
+        if let nextMonth = currentCalendar.date(byAdding: .month, value: 1, to: currentMonth) {
+            return nextMonth <= now
+        }
+        return false
+    }
+    
+    func changeMonth(by value: Int) {
+        guard let newMonth = Calendar.current.date(byAdding: .month, value: value, to: currentMonth) else { return }
+        currentMonth = newMonth
+        updateEmotionCounts()
+    }
+    
     func calculateContentHeight() -> CGFloat {
         return 800
     }
@@ -152,10 +190,9 @@ struct AnalyzeView: View {
     }
     
     func updateEmotionCounts() {
-        let currentDate = Date()
         let calendar = Calendar.current
-        let year = calendar.component(.year, from: currentDate)
-        let month = calendar.component(.month, from: currentDate)
+        let year = calendar.component(.year, from: currentMonth)
+        let month = calendar.component(.month, from: currentMonth)
         
         let entries = repository.fetchEntries(for: year, month: month)
         
