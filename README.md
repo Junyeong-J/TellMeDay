@@ -19,7 +19,7 @@
        - iOS : Swift 5.10, Xcode 15.3
        - 서버 : GPT API 사용
     - 라이브러리 
-       - iOS : SwiftUI, FSCalendar, Kingfisher, Realm, SnapKit, AVFoundation
+       - iOS : SwiftUI, FSCalendar, Kingfisher, Realm, SnapKit, AVFoundation, URLSession
     - Deployment Target : iOS 16.0
 
 ## 주요 기능
@@ -131,36 +131,168 @@ TellMeDay
 ## 1️⃣ STEP1. 텝바화면 (메인, 감정트래킹, 내 일기 모음집)
 ### 1-1 주요기능
 
+- 메인화면
+    - 달력에서 선택한 날짜에 작성된 일기를 조회하거나, 새 일기를 작성할 수 있는 화면입니다.
+    - **MonthCalendarViewControllerWrapper**는 UIKit의 UICollectionView와 DiffableDataSource를 활용해 날짜별 일기를 효율적으로 관리하며, 이를 SwiftUI 뷰와 결합하여 달력 인터페이스를 구현했습니다.
+    - 달력의 각 셀에 저장된 일기 데이터가 있는지 시각적으로 표현하며, 선택된 날짜에 해당하는 일기를 로드합니다. 일기가 없는 경우, NavigationLink를 통해 새로운 일기 작성 화면으로 이동할 수 있습니다.
+- 감정 트래킹
+    - 사용자의 감정 상태를 시각적으로 트래킹하여 나무의 잎사귀로 표현하는 기능입니다.
+    - LeafShape는 SwiftUI의 커스텀 Shape로 구현되어, 감정 분석 결과에 따라 다른 색상으로 나무의 잎사귀가 채워집니다.
+    - 잎사귀의 색상은 AI 감정 분석 API를 통해 반환된 감정 데이터를 기반으로 동적으로 변경되며, 각 잎사귀는 감정의 강도에 따라 크기와 위치가 달라집니다. 이때, CALayer를 사용해 레이어별로 성능 최적화를 구현했습니다.
+- 내 일기 모음집:
+    - 사용자가 작성한 일기 데이터를 Realm에서 불러와 날짜별로 정렬하여 표시합니다.
+    - DiaryCardView는 LazyVStack을 사용해 성능을 최적화하며, 대량의 일기 데이터를 스크롤할 때 부드럽게 렌더링됩니다. 이 데이터는 ViewModel에서 관리하며, Fetch 및 필터링 작업은 비동기적으로 수행됩니다.
+
 ### 1-2 고민한점
-
+1. 잎사귀의 모양과 시각적 표현
+    - 감정 트래킹 화면에서 감정 데이터를 어떻게 효과적으로 시각화할지 고민했습니다. 처음에는 사진을 사용할지 고려했지만, SwiftUI의 Shape 프로토콜을 활용해 커스텀 LeafShape를 구현할 수 있다는 것을 알게 되었습니다.
+      이를 통해 Bezier 곡선을 사용하여 부드러운 곡선의 잎사귀 모양을 그렸으며, 감정의 강도에 따라 잎사귀의 크기와 모양이 다르게 변하도록 설정했습니다.
+2. 탭바뷰의 커스텀
+   - 탭바 구조를 사용자 경험을 최적화하며 구현하는 방법에 대해 고민했습니다. 탭 전환 시 탭바의 높이 조정과 Safe Area를 고려한 디자인이 필요했으며, 다양한 화면 크기(iPhone 15 Pro, iPhone SE 등)를 지원해야 했습니다.
+     이를 해결하기 위해 GeometryReader를 사용하여 화면 크기에 맞게 뷰의 크기를 동적으로 조정하는 방식을 도입했습니다. 이로 인해 탭 전환 시 화면이 부드럽게 전환되면서도 다양한 기기에서 일관된 사용자 경험을 제공할 수 있었습니다.
 ### 1-3 트러블슈팅
+1. 일기 삭제시 앱이 충돌하는 문제
+- 일기를 삭제 후 View가 제대로 갱신되지 않거나 크래시하는 문제가 발생했습니다. 삭제된 일기에 연결된 데이터를 처리하는 과정에서 문제가 발생한것 같았고 앱이 강제 종료 되었습니다.
+2. 해결과정
+- 일기 삭제한 후에도 View에서 여전히 삭제된 DiaryEntry객체에 접근하려고 시도했기 때문에 발생한 것이었습니다.
+  그 객체가 더 이상 존재하지 않기 때문에 앱이 충돌하게 된다고 생각했습니다.
+  이를 해결하기 위해 deleteEntry() 메서드에서 entry = DiaryEntry()로 초기화하여 삭제된 일기에 대한 참조를 즉시 제거했습니다.
+  ~~~swift
+  
+    func deleteEntry() {
+        if let audioFileName = entry.audioFilePath {
+            let fullPath = getFullAudioPath(for: audioFileName)
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: fullPath) {
+                do {
+                    try fileManager.removeItem(atPath: fullPath)
+                    print("녹음 파일 삭제 완료")
+                } catch {
+                    print("녹음 파일 삭제 실패: \(error)")
+                }
+            }
+        }
+        repository.deleteEntryAndFolderIfNeeded(entry)
+        // 삭제 후 빈 DiaryEntry로 바로 초기화 했습니다.
+        entry = DiaryEntry()
+        firstNaviLinkActive = false
+        dismiss()
+    }
 
+  ~~~
+3. 결과
+   - 삭제 후에도 안전하게 View가 갱신되었습니다.
+   
 ### 1-4 키워드
+- Realm: 로컬 데이터베이스로 일기와 감정 데이터를 저장하고 조회.
+- SwiftUI: NavigationView, ScrollView, GeometryReader를 사용해 UI 구성.
+- CALayer: 감정 트래킹에서 잎사귀의 시각적 표현을 위해 커스텀 뷰 및 레이어를 사용.
+- MVVM 패턴: 데이터와 뷰를 효율적으로 관리하기 위해 ViewModel과 Repository를 통해 데이터를 처리.
 
-## 2️⃣ STEP2. 일기 작성 화면
+## 2️⃣ STEP2. 일기 작성 화면 및 녹음 기능(STT)
 ### 2-1 주요기능
-
+- 일기 작성 및 녹음기능
+    - 날짜를 선택후, STT(음성텍스트 변환)기능을 사용해 음성으로 일기를 작성할 수 있습니다. AVFoundation을 이용한 녹음 기능이 통합되어 있어
+      사용자가 직접 음성을 녹음하고, 파일매니저 내부에 저장합니다
+    - STT: SpeechRecognizer를 통해 녹음된 음성을 실시간으로 텍스트로 변환해 줍니다. 최대 500자까지 저장되도록 하였고, TextEditor를 통해
+      편집된 일기의 내용을 화면에 실시간으로 표시됩니다. 
 ### 2-2 고민한점
-
+- STT기능의 정확성과 음질
+    - 처음에는 STT(음성 텍스트 변환) 기능의 정확도와 음질을 어떻게 최적화할지 잘 몰랐습니다.
+      음성 인식에서 발생하는 오류와 정확도 문제를 해결하기 위해 SpeechRecognizer의 언어 설정을 사용자의 디바이스에 맞춰 동적으로 변경했고, 음성 인식 결과가 실시간으로 반영되도록 개선했습니다.
+    - 또한, 녹음 파일의 크기를 고려하여 12000Hz의 샘플 레이트로 설정했는데, 예상보다 음질이 괜찮았습니다.
+      이 샘플 레이트는 파일 크기와 음질의 균형을 맞추는 적절한 선택이었지만, 필요에 따라 샘플 레이트를 상향 조정해 음질을 더욱 개선할 수 있었습니다.
 ### 2-3 트러블슈팅
+1. 녹음 시간 초과시 STT기능 중단 안되는 현상
+    - 음성 녹음 기능이 최대 3분으로 제한되어있지만, 3분이 지나도 STT는 계속 실행되고 있었습니다. 즉 백그라운드에서 음성인식은 진행되고 있었습니다.
+2. 해결과정
+    - 문제를 해결하기위해 먼저 STT와 녹음이 어떻게 동기화 되는지 확인했습니다.
+      처음에는 stopTranscribing() 메서드에서 audioEngine과 recognitionTask를 중단하기 위해 audioEngine.stop(),
+      recognitionRequest?.endAudio(), recognitionTask?.cancel()을 호출했지만, 이 방법만으로는 STT가 완전히 종료되지 않았습니다.
+      STT의 일부 리소스가 여전히 할당된 상태로 남아 있어, STT 기능이 계속 동작하고 있었습니다.
+      이를 해결하기 위해 recognitionRequest와 recognitionTask를 nil로 설정하고 나서야 STT 기능이 완전히 중단되었습니다.
+      ~~~swift
 
+        func stopTranscribing() {
+            if audioEngine.isRunning {
+                audioEngine.stop()
+                recognitionRequest?.endAudio()
+                recognitionTask?.cancel()
+            }
+        
+            accumulatedTranscript = transcript
+        
+            recognitionRequest = nil
+            recognitionTask = nil
+        }
+    
+       ~~~
+3. 결과
+    - 3분이 지날시 음성 녹음 및 STT 기능이 동시에 종료되었습니다.
 ### 2-4 키워드
+- SpeechRecognizer
+- AVFoundation
+- Realm
+- FileManager
+- TextEditor
 
-## 3️⃣ STEP3. 일기 녹음 기능 (STT)
+## 3️⃣ STEP3. 분석 화면 (API 연결)
 ### 3-1 주요기능
-
+- 일기를 음성으로 작성후 저장 시 해당 일기의 텍스트 기반으로 감정 분석 API를 호출하여 감정 분석 결과를 얻습니다
+  감정 분석은 AI모델을 통해 텍스트에서 긍정과 부정의 비율을 반환하고, 이를 통해 기쁨, 슬픔, 분노, 공포 이 4개의 감정중 하나로 도출해냅니다.
 ### 3-2 고민한점
-
+- 감정 데이터 시각화
+    - 감정 분석 결과를 어떻게 표현할지 고민이 많았습니다. 처음에는 단순히 텍스트로 표시할까 생각했으나
+      SwiftUI의 Charts라이브러리를 활용해보면 좋을거 같아 이 방식을 채택했습니다.
+      이를 통해 사용자는 감정 분석 결과를 시각적으로 한눈에 확인이 가능해 쉽게 더 이해할 수 있는 수치라고 생각했습니다.
 ### 3-3 트러블슈팅
-
+1. API호출 결과 파싱문제
+   - 처음에는 감정 분석을 위해 API를 호출했을 때, 응답이 내가 원하는 구조화된 데이터가 아니라, 단순히 "이 글은 긍정이며 ~~%, 부정이며 ~~%"와 같은 서술형 문장으로 왔습니다.
+     긍정과 부정의 비율을 숫자로, 감정상태도 따로 추출하고 싶었는데 어떻게 처리를 해야할지 문제가 생겼다.
+2. 해결과정
+   - 데이터를 추출하기 위한 방법으로 "정규 표현식(NSRegularExpression)"을 사용해 보았습니다.
+   ~~~swift
+    private func parseSentimentResult(_ sentimentText: String) -> [SentimentData] {
+        let positiveRegex = try? NSRegularExpression(pattern: "긍정:?\\s*(\\d+)%")
+        let negativeRegex = try? NSRegularExpression(pattern: "부정:?\\s*(\\d+)%")
+    
+        var positivePercentage: Int = 0
+        var negativePercentage: Int = 0
+    
+        if let match = positiveRegex?.firstMatch(in: sentimentText, range: NSRange(sentimentText.startIndex..., in: sentimentText)) {
+            if let range = Range(match.range(at: 1), in: sentimentText) {
+                positivePercentage = Int(sentimentText[range]) ?? 0
+            }
+        }
+    
+        if let match = negativeRegex?.firstMatch(in: sentimentText, range: NSRange(sentimentText.startIndex..., in: sentimentText)) {
+            if let range = Range(match.range(at: 1), in: sentimentText) {
+                negativePercentage = Int(sentimentText[range]) ?? 0
+            }
+        }
+    
+        return [
+            SentimentData(emotion: "긍정", percentage: Double(positivePercentage)),
+            SentimentData(emotion: "부정", percentage: Double(negativePercentage))
+        ]
+        }
+    
+        private func parseEmotion(_ sentimentText: String) -> String {
+        let emotionRegex = try? NSRegularExpression(pattern: "(기쁨|슬픔|공포|분노)")
+    
+        if let match = emotionRegex?.firstMatch(in: sentimentText, range: NSRange(sentimentText.startIndex..., in: sentimentText)) {
+            if let range = Range(match.range(at: 1), in: sentimentText) {
+                return String(sentimentText[range])
+            }
+        }
+    
+        return "분석 실패"
+    }
+    ~~~
+3. 결과
+   - 이렇게 정규 표현식을 사용하여 응답을 파싱했더니 내가원했던 긍정/부정/감정 비율 및 상태를 정확하게 추출 할 수 있었습니다. 이를 이용해서 바로 UI에 반영할 수 있었습니다.
 ### 3-4 키워드
-
-## 4️⃣ STEP4. 분석 화면 (API 연결)
-### 4-1 주요기능
-
-### 4-2 고민한점
-
-### 4-3 트러블슈팅
-
-### 4-4 키워드
-
+- API통신 (URLSession)
+- 감정 분석
+- Json 파싱
+- Charts
