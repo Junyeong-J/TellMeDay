@@ -34,9 +34,7 @@
 - TextEditor: 일기 편집 및 실시간 텍스트 표시.
 - API통신 (URLSession): 감정 분석 API 연결.
 - NSRegularExpression: API 응답 데이터 파싱에 사용.
-- 감정 분석: 텍스트 기반으로 감정 상태 추출.
 - Charts: SwiftUI 라이브러리를 활용한 감정 분석 결과 시각화.
-- Json 파싱: 감정 분석 API의 응답 데이터를 처리.
 
 <!--
 ## 파일 디렉토리 구조
