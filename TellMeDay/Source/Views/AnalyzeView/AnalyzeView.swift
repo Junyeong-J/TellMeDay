@@ -39,7 +39,12 @@ struct AnalyzeView: View {
     
     @State private var animatePercentage: Double = 0
     @State private var dateRangeText: String = ""
-    @State private var emotionCounts: [String: Int] = ["기쁨": 0, "공포": 0, "분노": 0, "슬픔": 0]
+    @State private var emotionCounts: [String: Int] = [
+        StringData.Emotion.joyKey: 0,
+        StringData.Emotion.sadnessKey: 0,
+        StringData.Emotion.angerKey: 0,
+        StringData.Emotion.fearKey: 0
+    ]
     @State private var currentMonth: Date = Date()
     var repository = ListTableRepository()
     
@@ -49,7 +54,7 @@ struct AnalyzeView: View {
             let shouldScroll = contentHeight > geometry.size.height
             ScrollView(shouldScroll ? .vertical : []) {
                 VStack {
-                    Text("나무는 당신의 감정으로 채워집니다 - 각각의 잎사귀가 고유한 감정을 담고 있어요.")
+                    Text(StringData.Analyze.description)
                         .font(Font.customFont(name: CustomFont.gyuri, size: 25))
                         .foregroundColor(.appBlackAndWhite)
                         .padding(.top)
@@ -97,7 +102,7 @@ struct AnalyzeView: View {
                     )
                     .padding(.vertical)
                     
-                    Text("저장소에 넣어둔 기간")
+                    Text(StringData.Analyze.savedRange)
                         .font(Font.customFont(name: CustomFont.gyuri, size: 24))
                         .asForeground(.appBlackAndWhite)
                     
@@ -129,10 +134,10 @@ struct AnalyzeView: View {
                     .padding(.bottom, 5)
                     
                     HStack(spacing: 15) {
-                        CustomBarMark(color: .red, percentage: percentage(for: "분노"), emotionName: "분노", animatePercentage: $animatePercentage)
-                        CustomBarMark(color: .yellow, percentage: percentage(for: "공포"), emotionName: "공포", animatePercentage: $animatePercentage)
-                        CustomBarMark(color: .green, percentage: percentage(for: "기쁨"), emotionName: "기쁨", animatePercentage: $animatePercentage)
-                        CustomBarMark(color: .blue, percentage: percentage(for: "슬픔"), emotionName: "슬픔", animatePercentage: $animatePercentage)
+                        CustomBarMark(color: .red, percentage: percentage(for: StringData.Emotion.angerKey), emotionName: StringData.Emotion.localized(StringData.Emotion.angerKey), animatePercentage: $animatePercentage)
+                        CustomBarMark(color: .yellow, percentage: percentage(for: StringData.Emotion.fearKey), emotionName: StringData.Emotion.localized(StringData.Emotion.fearKey), animatePercentage: $animatePercentage)
+                        CustomBarMark(color: .green, percentage: percentage(for: StringData.Emotion.joyKey), emotionName: StringData.Emotion.localized(StringData.Emotion.joyKey), animatePercentage: $animatePercentage)
+                        CustomBarMark(color: .blue, percentage: percentage(for: StringData.Emotion.sadnessKey), emotionName: StringData.Emotion.localized(StringData.Emotion.sadnessKey), animatePercentage: $animatePercentage)
                     }
                     .frame(height: 150)
                     .padding()
@@ -181,10 +186,10 @@ struct AnalyzeView: View {
         let emotion = emotions[index % emotions.count]
         
         switch emotion {
-        case "분노": return .red
-        case "공포": return .yellow
-        case "기쁨": return .green
-        case "슬픔": return .blue
+        case StringData.Emotion.angerKey: return .red
+        case StringData.Emotion.fearKey: return .yellow
+        case StringData.Emotion.joyKey: return .green
+        case StringData.Emotion.sadnessKey: return .blue
         default: return .gray
         }
     }
@@ -196,7 +201,12 @@ struct AnalyzeView: View {
         
         let entries = repository.fetchEntries(for: year, month: month)
         
-        var counts: [String: Int] = ["기쁨": 0, "공포": 0, "분노": 0, "슬픔": 0]
+        var counts: [String: Int] = [
+            StringData.Emotion.joyKey: 0,
+            StringData.Emotion.sadnessKey: 0,
+            StringData.Emotion.angerKey: 0,
+            StringData.Emotion.fearKey: 0
+        ]
         
         for entry in entries {
             if let emotion = entry.emotion {

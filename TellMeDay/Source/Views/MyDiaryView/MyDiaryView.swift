@@ -70,7 +70,7 @@ struct MyDiaryView: View {
                 ScrollView {
                     VStack(spacing: 16) {
                         if diaryEntries.isEmpty {
-                            Text("작성한 일기가 없습니다")
+                            Text(StringData.MyDiary.noEntryMessage)
                                 .font(Font.customFont(name: CustomFont.gyuri, size: 20))
                                 .asForeground(.appGrayAndWhite)
                                 .padding(.top, 60)

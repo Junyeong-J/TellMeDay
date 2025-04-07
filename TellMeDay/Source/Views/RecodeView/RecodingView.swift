@@ -12,7 +12,9 @@ struct RecodingView: View {
     let selectedDate: Date
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = RecodingViewModel()
-    let categories = ["일상생활", "영화", "여행", "기타"]
+    
+    let categories = StringData.Category.all
+    
     @Binding var firstNaviLinkActive: Bool
     @Binding var hideTabBar: Bool
     
@@ -26,34 +28,44 @@ struct RecodingView: View {
                 }
             
             if viewModel.output.customCategoryVisible {
-                TitleTextField(placeholder: Text("카테고리 입력하기").font(Font.customFont(name: CustomFont.gyuri, size: 20)).foregroundColor(.gray), text: $viewModel.input.customCategory)
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(12)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                    .padding(.horizontal)
+                TitleTextField(
+                    placeholder: Text(StringData.Common.categoryInput)
+                        .font(Font.customFont(name: CustomFont.gyuri, size: 20))
+                        .foregroundColor(.gray),
+                    text: $viewModel.input.customCategory
+                )
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                .padding(.horizontal)
             }
             
             VStack(alignment: .leading) {
-                Text("제목")
+                Text(StringData.Common.title)
                     .font(Font.customFont(name: CustomFont.gyuri, size: 35))
                     .asForeground(.appBlackAndWhite)
                     .padding(.leading)
                 
-                TitleTextField(placeholder: Text("제목을 입력하세요").font(Font.customFont(name: CustomFont.gyuri, size: 20)).foregroundColor(.gray), text: $viewModel.output.title)
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(12)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                    .disabled(viewModel.output.isSkipTitle)
-                    .onChange(of: viewModel.output.title) { newTitle in
-                        viewModel.updateTitle(newTitle)
-                    }
+                TitleTextField(
+                    placeholder: Text(StringData.Common.enterTitle)
+                        .font(Font.customFont(name: CustomFont.gyuri, size: 20))
+                        .foregroundColor(.gray),
+                    text: $viewModel.output.title
+                )
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                .disabled(viewModel.output.isSkipTitle)
+                .onChange(of: viewModel.output.title) { newTitle in
+                    viewModel.updateTitle(newTitle)
+                }
                 
                 Button(action: {
                     viewModel.input.skipButtonTapped.send(())
                 }) {
-                    Text(viewModel.output.isSkipTitle ? "제목 입력하기" : "제목 입력하지 않기")
+                    Text(viewModel.output.isSkipTitle ? StringData.Common.writeTitle : StringData.Common.skipTitle)
                         .font(Font.customFont(name: CustomFont.gyuri, size: 20))
                         .asForeground(.appGrayAndWhite)
                         .padding(.horizontal)
@@ -76,10 +88,12 @@ struct RecodingView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: VoiceDiaryRecordingView(firstNaviLinkActive: $firstNaviLinkActive,
-                                                                    selectedDate: selectedDate,
-                                                                    title: viewModel.output.title,
-                                                                    category: viewModel.output.selectedCategory)) {
+                NavigationLink(destination: VoiceDiaryRecordingView(
+                    firstNaviLinkActive: $firstNaviLinkActive,
+                    selectedDate: selectedDate,
+                    title: viewModel.output.title,
+                    category: viewModel.output.selectedCategory
+                )) {
                     Image(systemName: "arrowshape.right.circle")
                         .resizable()
                         .frame(width: 30, height: 30)
@@ -96,10 +110,9 @@ struct RecodingView: View {
         .onTapGesture {
             hideKeyboard()
         }
-        
     }
-    
 }
+
 
 extension View {
     func hideKeyboard() {

@@ -10,13 +10,13 @@ import SwiftUI
 struct EmotionImageManager {
     static func emojiImage(for emotion: String) -> Image {
         switch emotion {
-        case "기쁨":
+        case StringData.Emotion.joyKey:
             return Image("happyEmoji")
-        case "슬픔":
+        case StringData.Emotion.sadnessKey:
             return Image("sadEmoji")
-        case "공포":
+        case StringData.Emotion.fearKey:
             return Image("panicEmoji")
-        case "분노":
+        case StringData.Emotion.angerKey:
             return Image("angryEmoji")
         default:
             return Image(systemName: "questionmark.circle.fill")
@@ -25,17 +25,16 @@ struct EmotionImageManager {
     
     static func emojiName(for emotion: String) -> String {
         switch emotion {
-        case "기쁨":
+        case StringData.Emotion.joyKey:
             return "happyEmoji"
-        case "슬픔":
+        case StringData.Emotion.sadnessKey:
             return "sadEmoji"
-        case "공포":
+        case StringData.Emotion.fearKey:
             return "panicEmoji"
-        case "분노":
+        case StringData.Emotion.angerKey:
             return "angryEmoji"
         default:
             return "questionmark.circle.fill"
         }
     }
-    
 }

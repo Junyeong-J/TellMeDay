@@ -1,0 +1,75 @@
+/* 
+  Localizable.strings
+  TellMeDay
+
+  Created by 전준영 on 4/7/25.
+  
+*/
+
+/* ========================= */
+/* 📍 Title 관련 */
+/* ========================= */
+"제목" = "Title";
+"제목을 입력하세요" = "Enter title";
+"제목 입력하지 않기" = "Skip title";
+"제목 입력하기" = "Write title";
+"제목 없음" = "Untitled";
+
+/* ========================= */
+/* 📍 Category 관련 */
+/* ========================= */
+"카테고리 입력하기" = "Enter category";
+"카테고리 선택" = "Category";
+"일상생활" = "Everyday";
+"영화" = "Movie";
+"여행" = "Travel";
+"기타" = "Etc";
+"카테고리 없음" = "No Category";
+
+/* ========================= */
+/* 📍 감정 분석 및 결과 화면 */
+/* ========================= */
+"감정 분석 결과" = "Emotion Analysis Result";
+"오늘의 기분입니다" = "Today’s mood";
+"메인 페이지로 가기" = "Go to main";
+"긍정" = "Positive";
+"부정" = "Negative";
+
+/* ========================= */
+/* 📍 녹음 관련 안내 */
+/* ========================= */
+"최대 녹음 시간 안내" = "The maximum recording time is 3 minutes.\nSTT text is saved up to 500 characters. After that, voice is recorded but not transcribed.\nThe file will be saved automatically on your device.";
+"저장 및 분석" = "Save and Analyze";
+
+/* ========================= */
+/* 📍 마이크 권한 경고 */
+/* ========================= */
+"마이크 권한 거부됨" = "Microphone Access Denied";
+"마이크에 대한 엑세스 권한이 거부되었습니다. 권한을 변경하시겠습니까?" = "Microphone access has been denied. Would you like to change permission settings?";
+"설정으로 이동" = "Go to Settings";
+"취소" = "Cancel";
+
+/* ========================= */
+/* 📍 일기 관련 */
+/* ========================= */
+"작성한 일기가 없습니다" = "No diary entries found.";
+"내용 없음" = "No Content";
+"일기를 삭제하시겠습니까?" = "Do you want to delete this diary entry?";
+"삭제된 일기는 복구할 수 없습니다." = "Deleted entries cannot be recovered.";
+"삭제" = "Delete";
+
+/* ========================= */
+/* 📍 감정 트래킹 */
+/* ========================= */
+"감정 분석 나무 설명" = "The tree is filled with your emotions - each leaf represents a unique feeling.";
+"저장소에 넣어둔 기간" = "Saved Period";
+
+"기쁨" = "Joy";
+"공포" = "Fear";
+"분노" = "Anger";
+"슬픔" = "Sadness";
+
+/* ========================= */
+/* 📍 기타 */
+/* ========================= */
+"수정" = "Update";

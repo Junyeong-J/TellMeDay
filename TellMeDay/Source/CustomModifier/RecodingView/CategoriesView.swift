@@ -14,10 +14,11 @@ private struct CategoriesView: ViewModifier {
     
     func body(content: Content) -> some View {
         HStack {
-            Text("카테고리")
+            Text(StringData.Common.categorySelect)
                 .font(Font.customFont(name: CustomFont.gyuri, size: 35))
                 .asForeground(.appBlackAndWhite)
                 .padding(.leading)
+            
             Menu {
                 Picker(selection: $selectedCategory) {
                     ForEach(categories, id: \.self) { category in
@@ -49,4 +50,3 @@ extension View {
         self.modifier(CategoriesView(selectedCategory: selectedCategory, categories: categories))
     }
 }
-

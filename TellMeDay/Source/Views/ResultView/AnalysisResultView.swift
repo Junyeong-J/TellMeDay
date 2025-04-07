@@ -25,17 +25,17 @@ struct AnalysisResultView: View {
                     .frame(height: geometry.size.height * 0.4)
                     .overlay(
                         VStack {
-                            Text("감정 분석 결과")
+                            Text(StringData.AnalysisResult.title)
                                 .font(Font.customFont(name: CustomFont.gyuri, size: 35))
                                 .padding()
-
+                            
                             Chart {
                                 ForEach(sentimentData) { data in
                                     BarMark(
                                         x: .value("비율", animatePercentage * data.percentage / 100),
-                                        y: .value("감정", data.emotion)
+                                        y: .value("감정", data.localizedEmotion)
                                     )
-                                    .foregroundStyle(by: .value("감정", data.emotion))
+                                    .foregroundStyle(by: .value("감정", data.localizedEmotion))
                                 }
                             }
                             .chartXScale(domain: 0...100)
@@ -53,8 +53,8 @@ struct AnalysisResultView: View {
                                 }
                             }
                             .chartForegroundStyleScale([
-                                "긍정": Color.blue,
-                                "부정": Color.red
+                                StringData.AnalysisResult.positive: Color.blue,
+                                StringData.AnalysisResult.negative: Color.red
                             ])
                             .chartPlotStyle { plotArea in
                                 plotArea
@@ -71,8 +71,8 @@ struct AnalysisResultView: View {
                         }
                     )
                     .padding()
-
-                Text("오늘의 기분입니다")
+                
+                Text(StringData.AnalysisResult.todayEmotion)
                     .font(Font.customFont(name: CustomFont.gyuri, size: 35))
                     .padding(.top)
                 
@@ -81,13 +81,13 @@ struct AnalysisResultView: View {
                     .scaledToFit()
                     .frame(height: geometry.size.height * 0.2)
                     .padding()
-
+                
                 Spacer()
                 
                 Button(action: {
                     firstNaviLinkActive = false
                 }) {
-                    Text("메인 페이지로 가기")
+                    Text(StringData.AnalysisResult.goToMain)
                         .font(.headline)
                         .asForeground(.white)
                         .padding()
@@ -113,6 +113,17 @@ struct SentimentData: Identifiable {
     let id = UUID()
     let emotion: String
     let percentage: Double
+    
+    var localizedEmotion: String {
+        switch emotion {
+        case "positive":
+            return StringData.AnalysisResult.positive
+        case "negative":
+            return StringData.AnalysisResult.negative
+        default:
+            return emotion
+        }
+    }
 }
 
 //struct AnalysisResultView_Previews: PreviewProvider {

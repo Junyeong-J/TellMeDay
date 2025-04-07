@@ -24,7 +24,7 @@ final class MonthCalendarView: BaseView {
                 
         calendar.today = nil
         calendar.scrollDirection = .horizontal
-        calendar.locale = Locale(identifier: "ko_KR")
+        calendar.locale = Locale.current
         calendar.scope = .month
         calendar.translatesAutoresizingMaskIntoConstraints = false
         calendar.appearance.titleSelectionColor = .lightGray.withAlphaComponent(0.5)

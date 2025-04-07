@@ -25,7 +25,7 @@ final class EditDiaryViewModel: ViewModelType {
     
     func updateCategory(_ category: String, entry: DiaryEntry) {
         repository.updateCategory(category, for: entry)
-        if category == "기타" {
+        if category == StringData.Category.etc {
             output.customCategoryVisible = true
         } else {
             output.customCategoryVisible = false
@@ -38,9 +38,9 @@ final class EditDiaryViewModel: ViewModelType {
     
     func updateEntry(_ entry: DiaryEntry, completion: @escaping () -> Void) {
         let finalCategory: String
-        if input.selectedCategory == "기타", input.customCategory.isEmpty {
-            finalCategory = "기타"
-        } else if input.selectedCategory == "기타" {
+        if input.selectedCategory == StringData.Category.etc, input.customCategory.isEmpty {
+            finalCategory = StringData.Category.etc
+        } else if input.selectedCategory == StringData.Category.etc {
             finalCategory = input.customCategory
         } else {
             finalCategory = input.selectedCategory
@@ -53,16 +53,14 @@ final class EditDiaryViewModel: ViewModelType {
         }
     }
     
-    
     func toggleSkipTitle() {
         output.isSkipTitle.toggle()
         if output.isSkipTitle {
-            output.title = "제목 없음"
+            output.title = NSLocalizedString("제목 없음", comment: "")
         } else {
             output.title = ""
         }
     }
-    
 }
 
 extension EditDiaryViewModel {
@@ -90,7 +88,6 @@ extension EditDiaryViewModel {
             }
             .store(in: &cancellables)
     }
-    
 }
 
 extension EditDiaryViewModel {

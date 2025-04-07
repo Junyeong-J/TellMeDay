@@ -110,15 +110,11 @@ struct VoiceDiaryRecordingView: View {
                     }
                     Spacer()
                     
-                    Text("""
-                        최대 녹음 시간은 3분입니다.
-                        음성 텍스트(STT)는 최대 500자까지 저장되며, 500자가 초과되면 더 이상 텍스트로 변환되지 않습니다.
-                        그러나 녹음은 계속 진행되며, 파일은 자동으로 폰 내부에 저장됩니다.
-                        """)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .padding(.horizontal)
-                    .padding(.bottom, 100)
+                    Text(StringData.VoiceDiary.maxRecordingInfo)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .padding(.horizontal)
+                        .padding(.bottom, 100)
                 }
                 .background(.appBaseBackground)
                 .navigationBarBackButtonHidden(true)
@@ -140,8 +136,8 @@ struct VoiceDiaryRecordingView: View {
                                         self.emotion = emotion
                                         showAnalysisResult = true
                                         
-                                        let positiveScore = sentimentData.first(where: { $0.emotion == "긍정" })?.percentage ?? 0
-                                        let negativeScore = sentimentData.first(where: { $0.emotion == "부정" })?.percentage ?? 0
+                                        let positiveScore = sentimentData.first(where: { $0.emotion == "positive" })?.percentage ?? 0
+                                        let negativeScore = sentimentData.first(where: { $0.emotion == "negative" })?.percentage ?? 0
                                         viewModel.saveDiaryEntry(category: category, title: title, positiveScore: positiveScore, negativeScore: negativeScore, emotion: emotion)
                                     } else {
                                         // 오류 처리
@@ -149,7 +145,7 @@ struct VoiceDiaryRecordingView: View {
                                 }
                             }
                         }) {
-                            Text("저장 및 분석")
+                            Text(StringData.VoiceDiary.saveAndAnalyze)
                                 .font(.headline)
                                 .asForeground(isAnalyzeButtonEnabled ? .appBlackAndWhite : .gray)
                         }
@@ -167,17 +163,17 @@ struct VoiceDiaryRecordingView: View {
             }
             .alert(isPresented: $showAlert) {
                 Alert(
-                    title: Text("마이크 권한 거부됨"),
-                    message: Text("마이크에 대한 엑세스 권한이 거부되었습니다. 권한을 변경하시겠습니까?"),
-                    primaryButton: .default(Text("설정으로 이동"), action: {
+                    title: Text(StringData.VoiceDiary.micPermissionDeniedTitle),
+                    message: Text(StringData.VoiceDiary.micPermissionDeniedMessage),
+                    primaryButton: .default(Text(StringData.VoiceDiary.goToSettings), action: {
                         if let appSettings = URL(string: UIApplication.openSettingsURLString) {
                             UIApplication.shared.open(appSettings)
                         }
                     }),
-                    secondaryButton: .cancel(Text("취소"))
+                    secondaryButton: .cancel(Text(StringData.VoiceDiary.cancel))
                 )
             }
-
+            
         }
     }
     
@@ -200,7 +196,7 @@ struct VoiceDiaryRecordingView: View {
             completion(false)
         }
     }
-
+    
 }
 
 

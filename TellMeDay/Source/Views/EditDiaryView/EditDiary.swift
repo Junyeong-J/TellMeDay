@@ -11,13 +11,14 @@ struct EditDiary: View {
     
     @Binding var entry: DiaryEntry
     @StateObject private var viewModel = EditDiaryViewModel()
-    @State private var selectedCategory: String = "일상생활"
-    let categories = ["일상생활", "영화", "여행", "기타"]
+    @State private var selectedCategory: String = StringData.Category.everyday
+    
+    let categories = StringData.Category.all
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
-            
             dateHeaderView(dateText: viewModel.output.selectedDate)
             
             categoriesView(selectedCategory: $selectedCategory, categories: categories)
@@ -30,42 +31,48 @@ struct EditDiary: View {
                 }
                 .onChange(of: selectedCategory) { newCategory in
                     viewModel.input.selectedCategory = newCategory
-                    if newCategory == "기타" {
-                        viewModel.output.customCategoryVisible = true
-                    } else {
-                        viewModel.output.customCategoryVisible = false
-                    }
+                    viewModel.output.customCategoryVisible = (newCategory == StringData.Category.etc)
                 }
             
             if viewModel.output.customCategoryVisible {
-                TitleTextField(placeholder: Text("카테고리 입력하기").font(Font.customFont(name: CustomFont.gyuri, size: 20)).foregroundColor(.gray), text: $viewModel.input.customCategory)
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(12)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                    .padding(.horizontal)
+                TitleTextField(
+                    placeholder: Text(StringData.Common.categoryInput)
+                        .font(Font.customFont(name: CustomFont.gyuri, size: 20))
+                        .foregroundColor(.gray),
+                    text: $viewModel.input.customCategory
+                )
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                .padding(.horizontal)
             }
             
             VStack(alignment: .leading) {
-                Text("제목")
+                Text(StringData.Common.title)
                     .font(Font.customFont(name: CustomFont.gyuri, size: 35))
                     .asForeground(.appBlackAndWhite)
                     .padding(.leading)
                 
-                TitleTextField(placeholder: Text("제목을 입력하세요").font(Font.customFont(name: CustomFont.gyuri, size: 20)).foregroundColor(.gray), text: $viewModel.output.title)
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(12)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                    .disabled(viewModel.output.isSkipTitle)
-                    .onChange(of: viewModel.output.title) { newTitle in
-                        viewModel.updateTitle(newTitle)
-                    }
+                TitleTextField(
+                    placeholder: Text(StringData.Common.enterTitle)
+                        .font(Font.customFont(name: CustomFont.gyuri, size: 20))
+                        .foregroundColor(.gray),
+                    text: $viewModel.output.title
+                )
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                .disabled(viewModel.output.isSkipTitle)
+                .onChange(of: viewModel.output.title) { newTitle in
+                    viewModel.updateTitle(newTitle)
+                }
                 
                 Button(action: {
                     viewModel.toggleSkipTitle()
                 }) {
-                    Text(viewModel.output.isSkipTitle ? "제목 입력하기" : "제목 입력하지 않기")
+                    Text(viewModel.output.isSkipTitle ? StringData.Common.writeTitle : StringData.Common.skipTitle)
                         .font(Font.customFont(name: CustomFont.gyuri, size: 20))
                         .asForeground(.appGrayAndWhite)
                         .padding(.horizontal)
@@ -92,7 +99,7 @@ struct EditDiary: View {
                         dismiss()
                     }
                 }) {
-                    Text("수정")
+                    Text(StringData.Common.modify)
                         .font(.headline)
                         .asForeground(.appBlackAndWhite)
                 }

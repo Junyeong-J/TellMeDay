@@ -33,21 +33,22 @@ final class RecodingViewModel: ViewModelType {
             }
             .store(in: &cancellables)
     }
-    
 }
+
+// MARK: - Input & Output
 
 extension RecodingViewModel {
     
     struct Input {
         var selectedDate = Date()
-        var selectedCategory: String = "카테고리 선택"
+        var selectedCategory: String = StringData.Common.categorySelect
         var customCategory: String = ""
         let skipButtonTapped = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
         var selectedDate: String = ""
-        var selectedCategory: String = "카테고리 선택"
+        var selectedCategory: String = StringData.Common.categorySelect
         var customCategoryVisible: Bool = false
         var isSkipTitle: Bool = false
         var title: String = ""
@@ -56,19 +57,21 @@ extension RecodingViewModel {
     
     func transform() {
         output.selectedDate = FormatterManager.shared.recodingDateHeader(input.selectedDate)
-        if input.selectedCategory == "기타" && !input.customCategory.isEmpty {
+        
+        if input.selectedCategory == StringData.Category.etc && !input.customCategory.isEmpty {
             output.selectedCategory = input.customCategory
         } else {
             output.selectedCategory = input.selectedCategory
         }
-        output.customCategoryVisible = input.selectedCategory == "기타"
-        output.title = output.isSkipTitle ? "제목 없음" : output.title
-        output.isActionButtonEnabled = !output.title.isEmpty && output.selectedCategory != "카테고리 선택"
+        
+        output.customCategoryVisible = input.selectedCategory == StringData.Category.etc
+        output.title = output.isSkipTitle ? NSLocalizedString("제목 없음", comment: "") : output.title
+        output.isActionButtonEnabled = !output.title.isEmpty && output.selectedCategory != StringData.Common.categorySelect
     }
     
     func updateCategory(_ category: String) {
         input.selectedCategory = category
-        if category != "기타" {
+        if category != StringData.Category.etc {
             input.customCategory = ""
         }
         transform()
@@ -81,12 +84,12 @@ extension RecodingViewModel {
     
     private func toggleSkipTitle() {
         output.isSkipTitle.toggle()
-        output.title = output.isSkipTitle ? "제목 없음" : ""
+        output.title = output.isSkipTitle ? NSLocalizedString("제목 없음", comment: "") : ""
         transform()
     }
-    
 }
 
+// MARK: - Action
 extension RecodingViewModel {
     
     enum Action {
@@ -99,5 +102,4 @@ extension RecodingViewModel {
             input.skipButtonTapped.send(())
         }
     }
-    
 }

@@ -101,6 +101,8 @@ extension AudioRecorderManager {
             return
         }
         
+        print("recordingURL: \(recordingURL)")
+        
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: recordingURL)
             audioPlayer?.delegate = self

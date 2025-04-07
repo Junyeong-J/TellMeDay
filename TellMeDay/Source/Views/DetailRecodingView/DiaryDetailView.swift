@@ -27,7 +27,7 @@ struct DiaryDetailView: View {
                 .font(Font.customFont(name: CustomFont.gyuri, size: 30))
                 .foregroundColor(.appBlackAndWhite)
                 .padding(.bottom, 5)
-            Text("\(entry.parentFolder.first?.category ?? "카테고리 없음") 긍정: \(entry.positiveScore ?? 0)%, 부정: \(entry.negativeScore ?? 0)%")
+            Text("\(entry.parentFolder.first?.category ?? StringData.DiaryDetail.noCategory) 긍정: \(entry.positiveScore ?? 0)%, 부정: \(entry.negativeScore ?? 0)%")
                 .font(Font.customFont(name: CustomFont.gyuri, size: 20))
                 .foregroundColor(.appGrayAndWhite)
                 .padding(.bottom, 10)
@@ -44,7 +44,7 @@ struct DiaryDetailView: View {
                 .padding(.bottom, 10)
             
             ScrollView {
-                Text(entry.content ?? "No Content")
+                Text(entry.content ?? StringData.DiaryDetail.noContent)
                     .font(Font.customFont(name: CustomFont.gyuri, size: 18))
                     .padding()
                     .background(Color.appWhiteAndGray)
@@ -95,7 +95,7 @@ struct DiaryDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-//                    firstNaviLinkActive = false
+                    //                    firstNaviLinkActive = false
                     dismiss()
                 }) {
                     Image(systemName: "chevron.left")
@@ -125,12 +125,12 @@ struct DiaryDetailView: View {
                     }
                     .alert(isPresented: $showAlert) {
                         Alert(
-                            title: Text("일기를 삭제하시겠습니까?"),
-                            message: Text("삭제된 일기는 복구할 수 없습니다."),
-                            primaryButton: .destructive(Text("삭제")) {
+                            title: Text(StringData.DiaryDetail.deleteTitle),
+                            message: Text(StringData.DiaryDetail.deleteMessage),
+                            primaryButton: .destructive(Text(StringData.DiaryDetail.deleteConfirm)) {
                                 deleteEntry()
                             },
-                            secondaryButton: .cancel(Text("취소"))
+                            secondaryButton: .cancel(Text(StringData.DiaryDetail.cancel))
                         )
                     }
                 }

@@ -25,6 +25,8 @@
 		720789C02CA70B4B0053BE8B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 720789BF2CA70B4B0053BE8B /* .gitignore */; };
 		720789C22CA70BC70053BE8B /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789C12CA70BC70053BE8B /* APIKey.swift */; };
 		720789C42CA722790053BE8B /* EmotionImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720789C32CA722790053BE8B /* EmotionImageManager.swift */; };
+		723114A52DA39516009D560B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 723114A32DA39516009D560B /* Localizable.strings */; };
+		723114A92DA39742009D560B /* StringData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723114A82DA39742009D560B /* StringData.swift */; };
 		72940CA32C9028C800311CE8 /* TellMeDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA22C9028C800311CE8 /* TellMeDayApp.swift */; };
 		72940CA52C9028C800311CE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72940CA42C9028C800311CE8 /* MainView.swift */; };
 		72940CA72C9028C900311CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72940CA62C9028C900311CE8 /* Assets.xcassets */; };
@@ -90,6 +92,9 @@
 		720789BF2CA70B4B0053BE8B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		720789C12CA70BC70053BE8B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		720789C32CA722790053BE8B /* EmotionImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionImageManager.swift; sourceTree = "<group>"; };
+		723114A42DA39516009D560B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		723114A62DA3957D009D560B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		723114A82DA39742009D560B /* StringData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringData.swift; sourceTree = "<group>"; };
 		72940C9F2C9028C800311CE8 /* TellMeDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72940CA22C9028C800311CE8 /* TellMeDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeDayApp.swift; sourceTree = "<group>"; };
 		72940CA42C9028C800311CE8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -165,6 +170,7 @@
 		720789932CA4548A0053BE8B /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				723114A72DA39736009D560B /* Struct */,
 				720789942CA4549F0053BE8B /* Enums */,
 			);
 			path = Constants;
@@ -238,6 +244,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		723114A72DA39736009D560B /* Struct */ = {
+			isa = PBXGroup;
+			children = (
+				723114A82DA39742009D560B /* StringData.swift */,
+			);
+			path = Struct;
+			sourceTree = "<group>";
+		};
 		72940C962C9028C800311CE8 = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +277,7 @@
 				72940D092C982D7E00311CE8 /* Resource */,
 				72940CA82C9028C900311CE8 /* Preview Content */,
 				720789C12CA70BC70053BE8B /* APIKey.swift */,
+				723114A32DA39516009D560B /* Localizable.strings */,
 			);
 			path = TellMeDay;
 			sourceTree = "<group>";
@@ -482,6 +497,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 72940C962C9028C800311CE8;
 			packageReferences = (
@@ -504,6 +520,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				723114A52DA39516009D560B /* Localizable.strings in Resources */,
 				720789C02CA70B4B0053BE8B /* .gitignore in Resources */,
 				72940CAA2C9028C900311CE8 /* Preview Assets.xcassets in Resources */,
 				72940D2E2C9FEA2600311CE8 /* 나눔손글씨 규리의 일기.ttf in Resources */,
@@ -522,6 +539,7 @@
 				72A3AA402CA93F15005FBCDD /* EditDiary.swift in Sources */,
 				72940D112C98373900311CE8 /* MonthCalendarViewController.swift in Sources */,
 				720789A82CA5565A0053BE8B /* RealmModel.swift in Sources */,
+				723114A92DA39742009D560B /* StringData.swift in Sources */,
 				720789A12CA479C80053BE8B /* DateRecodingView.swift in Sources */,
 				72940D2B2C9EAA0D00311CE8 /* ForegroundWrapper.swift in Sources */,
 				72A3AA452CA97653005FBCDD /* MyDiaryView.swift in Sources */,
@@ -562,12 +580,25 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		723114A32DA39516009D560B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				723114A42DA39516009D560B /* en */,
+				723114A62DA3957D009D560B /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		72940CAB2C9028C900311CE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -631,6 +662,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -709,7 +741,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Jun.TellMeDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -749,7 +781,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Jun.TellMeDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
